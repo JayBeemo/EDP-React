@@ -1,4 +1,9 @@
+
 import * as React from 'react';
+import i1 from './img/i1.png';
+import './login.css';
+import './main'
+
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -11,6 +16,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
 
 function Copyright(props) {
   return (
@@ -27,26 +33,31 @@ function Copyright(props) {
 
 const theme = createTheme();
 
+//Navigate to Main.js
+
 export default function SignIn() {
+  const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
-      email: data.get('email'),
+      name: data.get('name'),
       password: data.get('password'),
     });
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <div align="center">
-            B.CAVE LOGO 들어가야됨
+    <ThemeProvider theme={theme} >
+      <Container component="main" maxWidth="xs" className="img-animate-1">
+        <CssBaseline/>
+        {/* 메인 배너 이미지 등록 */}
+        <div className="banner" align="center">
+            <img src={i1} alt="banner"/>
         </div>
+
         <Box
           sx={{
-            marginTop: 8,
+            marginTop: 1,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -63,10 +74,10 @@ export default function SignIn() {
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              id="name"
+              label="성명"
+              name="name"
+              autoComplete="name"
               autoFocus
             />
             <TextField
@@ -74,7 +85,7 @@ export default function SignIn() {
               required
               fullWidth
               name="password"
-              label="Password"
+              label="비밀번호"
               type="password"
               id="password"
               autoComplete="current-password"
@@ -88,9 +99,7 @@ export default function SignIn() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-            //   onClick={
-            //    test
-            //   }
+              onClick = {() => navigate('/main')}
             >
               Sign In
             </Button>
