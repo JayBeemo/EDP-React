@@ -1,4 +1,5 @@
 //import logo from './logo.svg';
+/* eslint-disabled */ 
 import './App.css';
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';

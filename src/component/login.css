@@ -1,16 +1,44 @@
+.main{
+    width: 100%;
+    height: 100%;
+}
+
+.content{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
 .banner{
     padding-top: 20px;
     align-items: center;
 }
+
+
 .img-animate-1 {
     width: 100%; 
     margin:0 auto;
     animation: fadein 5s ease 3s;
       -webkit-animation: fadein 3s; /* Safari and Chrome */
 }
+
 .img{
-      width: 100%;
+    width: 100%;
 }
+
+video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
 @keyframes fadein {
     from {
         opacity: 0;
