@@ -15,6 +15,10 @@
     color: white;
 }
 
+.box-border{
+    border-color: aqua;
+}
+
 .banner{
     padding-top: 20px;
     align-items: center;

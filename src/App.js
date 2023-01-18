@@ -17,8 +17,6 @@ function App() {
         <Route exact path="/main" element={<Main />}/>
       </Routes>
     </div>
-
   );
 }
-
 export default App;

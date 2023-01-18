@@ -4,7 +4,7 @@
 import * as React from 'react';
 import i1 from './img/i1.png';
 import './login.css';
-import './main'
+import './main';
 
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -17,9 +17,9 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import { lightBlue } from '@mui/material/colors';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
-
 
 // Footer 카피라이트
 function Copyright(props) {
@@ -27,7 +27,7 @@ function Copyright(props) {
     <Typography variant="body2" color="white" align="center"{...props}>
       {'Copyright © '}
       <Link color="inherit" href="http://www.barrels.co.kr/">
-        B.CAVE
+        B.Cave & Co.
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -39,14 +39,17 @@ function Copyright(props) {
 const theme = createTheme({
   palette:{
     primary:{
-      main: '#f5f5f5'
+      main: lightBlue[300],
     }
   }
 });
 
-// Default 펑션
+// React
 export default function SignIn() {
+  //navigation 정의
   const navigate = useNavigate();
+
+  //submit 이벤트 처리
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -54,12 +57,21 @@ export default function SignIn() {
       name: data.get('name'),
       password: data.get('password'),
     });
-  };
+    
+  // 계정 정보 체크
+    if( data.get('name') === '' || data.get('password') === ''){
+      alert('계정정보 입력 오류');
+      navigate('/login');
+    }else{
+      navigate('/main');
+    }
 
-  // 페이지 반영 Return
+  }
+      
+
+  // RENDER
   return (
     <ThemeProvider theme={theme} >
-      
       <div className='main'>
         {/* 메인페이지 동영상 */}
         <video muted autoPlay loop playsInline>
@@ -80,7 +92,7 @@ export default function SignIn() {
               alignItems: 'center',
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
               <LockOutlinedIcon />
             </Avatar>
 
@@ -90,16 +102,32 @@ export default function SignIn() {
 
             <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
               <TextField
+                sx={{
+                  ' .MuiOutlinedInput-root': {
+                    color: 'white',
+                    },
+                  }}  
+                InputLabelProps={{
+                  style: { color: '#fff' },
+                }}
                 margin="normal"
                 required
                 fullWidth
-                id="name"
+                id={FormData.name}
                 label="성명"
                 name="name"
                 autoComplete="name"
                 autoFocus
               />
               <TextField
+                sx={{
+                  ' .MuiOutlinedInput-root': {
+                    color: 'white',
+                    },
+                  }}  
+                InputLabelProps={{
+                  style: { color: '#fff' },
+                }}
                 margin="normal"
                 required
                 fullWidth
@@ -118,10 +146,10 @@ export default function SignIn() {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
-                onClick = {() => navigate('/main')}
-
+                // onClick = {() => navigate('/main')}
+                color="primary"
               >
-                Sign In
+                Sign in                
               </Button>
             </Box>
           </Box>

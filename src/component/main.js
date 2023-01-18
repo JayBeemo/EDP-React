@@ -1,25 +1,24 @@
 /* eslint-disabled */ 
 
 import * as React from 'react';
-
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import './isLogin';
+import { CssBaseline } from '@mui/material';
+//import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import isLogin from './isLogin';
 
 export default function main(){
+    isLogin();
 
     return(
-        <Typography component="h1" variant="h5">
-                asdfadsfasfd
-        </Typography>
+        <React.Fragment>
+            <CssBaseline />
+            <Container maxWidth="sm">
+                <div>
+                    <p>1234</p>
+                </div>
+            </Container>
+        </React.Fragment>
     )
 }
 
