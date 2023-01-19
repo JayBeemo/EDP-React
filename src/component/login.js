@@ -1,5 +1,4 @@
-
-/* eslint-disabled */ 
+// eslint-disable-next-line
 
 import * as React from 'react';
 import i1 from './img/i1.png';
@@ -10,8 +9,8 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
+// import FormControlLabel from '@mui/material/FormControlLabel';
+// import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -21,7 +20,9 @@ import { lightBlue } from '@mui/material/colors';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 
-// Footer 카피라이트
+  // 선언
+
+  // Footer 카피라이트
 function Copyright(props) {
   return (
     <Typography variant="body2" color="white" align="center"{...props}>
@@ -35,7 +36,7 @@ function Copyright(props) {
   );
 }
 
-// 테마 설정
+  // 테마 설정
 const theme = createTheme({
   palette:{
     primary:{
@@ -44,7 +45,7 @@ const theme = createTheme({
   }
 });
 
-// React
+  // React
 export default function SignIn() {
   //navigation 정의
   const navigate = useNavigate();
@@ -52,22 +53,26 @@ export default function SignIn() {
   //submit 이벤트 처리
   const handleSubmit = (event) => {
     event.preventDefault();
+  // 계정정보 Form 생성
     const data = new FormData(event.currentTarget);
+
+  // Session Storage 저장
+    window.sessionStorage.setItem('name',(data.get('name')))
+
     console.log({
       name: data.get('name'),
       password: data.get('password'),
+      setName : sessionStorage.getItem('name')
     });
-    
-  // 계정 정보 체크
+
+  // 계정 정보 입력 체크
     if( data.get('name') === '' || data.get('password') === ''){
       alert('계정정보 입력 오류');
       navigate('/login');
     }else{
       navigate('/main');
     }
-
   }
-      
 
   // RENDER
   return (
@@ -137,16 +142,18 @@ export default function SignIn() {
                 id="password"
                 autoComplete="current-password"
               />
-              <FormControlLabel
-                control={<Checkbox value="remember" />}
+              {/* <FormControlLabel
+                id="saveid"
+                name="saveid" 
+                control={<Checkbox
+                  />}
                 label="ID 기억하기"
-              />
+              /> */}
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
-                // onClick = {() => navigate('/main')}
                 color="primary"
               >
                 Sign in                
