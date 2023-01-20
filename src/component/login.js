@@ -19,6 +19,7 @@ import Container from '@mui/material/Container';
 import { lightBlue } from '@mui/material/colors';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
   // 선언
 
@@ -27,7 +28,7 @@ function Copyright(props) {
   return (
     <Typography variant="body2" color="white" align="center"{...props}>
       {'Copyright © '}
-      <Link color="inherit" href="http://www.barrels.co.kr/">
+      <Link color="inherit" href="http://www.barrels.co.kr/" target='__blank'>
         B.Cave & Co.
       </Link>{' '}
       {new Date().getFullYear()}
@@ -53,10 +54,12 @@ export default function SignIn() {
   //submit 이벤트 처리
   const handleSubmit = (event) => {
     event.preventDefault();
+
   // 계정정보 Form 생성
     const data = new FormData(event.currentTarget);
 
   // Session Storage 저장
+    window.sessionStorage.removeItem('name')
     window.sessionStorage.setItem('name',(data.get('name')))
 
     console.log({
@@ -67,7 +70,14 @@ export default function SignIn() {
 
   // 계정 정보 입력 체크
     if( data.get('name') === '' || data.get('password') === ''){
-      alert('계정정보 입력 오류');
+  // alert ( sweetalert2 활용 )
+      Swal.fire({
+        icon: "warning",
+        title: "접속 에러",
+        html: `<p>계정 정보 입력 에러</p>`,
+        confirmButtonText: "확인",
+        confirmButtonColor: "#148CFF"
+      })
       navigate('/login');
     }else{
       navigate('/main');
@@ -76,7 +86,7 @@ export default function SignIn() {
 
   // RENDER
   return (
-    <ThemeProvider theme={theme} >
+    <ThemeProvider theme={theme} display="fixed" height="100%">
       <div className='main'>
         {/* 메인페이지 동영상 */}
         <video muted autoPlay loop playsInline>
@@ -122,7 +132,7 @@ export default function SignIn() {
                 label="성명"
                 name="name"
                 autoComplete="name"
-                autoFocus
+                // autoFocus
               />
               <TextField
                 sx={{
@@ -156,7 +166,9 @@ export default function SignIn() {
                 sx={{ mt: 3, mb: 2 }}
                 color="primary"
               >
-                Sign in                
+                <Typography component="h1" variant="h6" color='white'>
+                 Sign in
+                </Typography>               
               </Button>
             </Box>
           </Box>

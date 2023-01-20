@@ -1,34 +1,103 @@
 /* eslint-disabled */ 
 
 import * as React from 'react';
-//import Box from '@mui/material/Box';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-// import Container from '@mui/material/Container';
+import './login'
+
+import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 
-import './login'
+//MUI
+
+import { styled, useTheme } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Drawer from '@mui/material/Drawer';
+import CssBaseline from '@mui/material/CssBaseline';
+import MuiAppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import List from '@mui/material/List';
+import Typography from '@mui/material/Typography';
+import Divider from '@mui/material/Divider';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+// import { createTheme, ThemeProvider } from '@mui/material/styles';
+import HomeIcon from '@mui/icons-material/Home';
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+
+//사이드메뉴 사이즈
+const drawerWidth = 200;
+
+const MainDrawer = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
+    ({ theme, open }) => ({
+      flexGrow: 1,
+      padding: theme.spacing(3),
+      transition: theme.transitions.create('margin', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+      }),
+      marginLeft: `-${drawerWidth}px`,
+      ...(open && {
+        transition: theme.transitions.create('margin', {
+          easing: theme.transitions.easing.easeOut,
+          duration: theme.transitions.duration.enteringScreen,
+        }),
+        marginLeft: 0,
+      }),
+    }),
+  );
+  
+  const AppBar = styled(MuiAppBar, {
+    shouldForwardProp: (prop) => prop !== 'open',
+  })(({ theme, open }) => ({
+    transition: theme.transitions.create(['margin', 'width'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    ...(open && {
+      width: `calc(100% - ${drawerWidth}px)`,
+      marginLeft: `${drawerWidth}px`,
+      transition: theme.transitions.create(['margin', 'width'], {
+        easing: theme.transitions.easing.easeOut,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
+    }),
+  }));
+
+  const DrawerHeader = styled('div')(({ theme }) => ({
+    display: 'flex',
+    alignItems: 'center',
+    padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+    justifyContent: 'flex-end',
+  }));
 
 //Session Check
 function IsLogin(){
     const navigate = useNavigate();
     useEffect(()=>{
         if(window.sessionStorage.getItem('name') !== '1' ){
-            alert('세션 입력 오류');
+            Swal.fire({
+                icon: "warning",
+                title: "접속 에러",
+                html: `<p>세션 체크 에러</p>`,
+                confirmButtonText: "확인",
+                confirmButtonColor: "#148CFF"
+              })
             window.sessionStorage.removeItem('name')
             navigate('/login')
-        }else{
-            alert('로그인 완료');
         }
+        // else{
+        //     alert('로그인 완료');
+        // }
     })
 }
-
 //react
 export default function Main(){
 //선언
@@ -40,35 +109,122 @@ export default function Main(){
         navigate('/')
         window.sessionStorage.removeItem('name')
     }
-        
+//Drawer 설정
+    const theme = useTheme();
+    const [open, setOpen] = React.useState(false);
 
+    const handleDrawerOpen = () => {
+        setOpen(true);
+    };
+
+    const handleDrawerClose = () => {
+        setOpen(false);
+    };
+        
 //render
     return(
-        <React.Fragment>
-            <Box sx={{ flexGrow: 1 }}>
-                <AppBar position="static">
-                    <Toolbar>
-                        <IconButton
-                            size="large"
-                            edge="start"
-                            color="inherit"
-                            aria-label="menu"
-                            sx={{ mr: 2 }}
-                        >
-                            <MenuIcon />
-                        </IconButton>
-                        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        </Typography>
-                        <Button
-                            color="inherit"
-                            onClick={handleOnClick}
-                        >
-                            Logout
-                        </Button>
-                    </Toolbar>
-                </AppBar>
+        <Box sx={{ display: 'flex' }}>
+        <CssBaseline />
+        <AppBar position="fixed" open={open}>
+            <Toolbar
+                sx={{
+                    display: 'flex',
+                    alignItems: 'center'
+                }}
+            >
+            <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                onClick={handleDrawerOpen}
+                edge="start"
+                sx={{ mr: 2, ...(open && { display: 'flex' }) }}
+                flexGrow={1}
+            >
+                <MenuIcon />
+            </IconButton>
+
+            <Typography variant="h6" noWrap component="div" flexGrow={1}>
+                EDP ( 비케이브 이미지 넣기 ; main 링크로 )
+            </Typography>
+
+            <IconButton
+                color="inherit"
+                edge="end"
+                flexGrow={1}
+                onClick={handleOnClick}
+            >
+                <Typography>
+                    LOGOUT
+                </Typography>
+            </IconButton>
+            </Toolbar>
+            
+        </AppBar>
+        <Drawer
+            sx={{
+            width: drawerWidth,
+            flexShrink: 0,
+            '& .MuiDrawer-paper': {
+                width: drawerWidth,
+                boxSizing: 'border-box',
+            },
+            }}
+            variant="persistent"
+            anchor="left"
+            open={open}
+        >
+            <DrawerHeader>
+            <IconButton onClick={handleDrawerClose}>
+                {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+            </IconButton>
+            </DrawerHeader>
+            <Divider />
+            <List>
+                {['HOME','HISTORY'].map((text, index) => (
+                    <ListItem key={text} disablePadding>
+                    <ListItemButton>
+                        <ListItemIcon>
+                            {index % 3 === 0 ? <HomeIcon /> : <ArrowRightIcon />}
+                        </ListItemIcon>
+                        <ListItemText primary={text} />
+                    </ListItemButton>
+                    </ListItem>
+                ))}
+            </List>
+            <Divider />
+            <List>
+            {['test1', 'test2', 'test3'].map((text, index) => (
+                <ListItem key={text} disablePadding>
+                <ListItemButton>
+                    <ListItemIcon>
+                        {index % 2 === 0 ? <ChevronLeftIcon /> : <ChevronLeftIcon />}
+                    </ListItemIcon>
+                    <ListItemText primary={text} />
+                </ListItemButton>
+                </ListItem>
+            ))}
+            </List>
+        </Drawer>
+        <MainDrawer open={open}>
+            <DrawerHeader/>
+            <Box
+                sx={{
+                    marginTop: 1,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                }}
+            >
+                <Typography paragraph variant='h3'>
+                복지포인트 설명 제목
+                </Typography>
+                <Typography paragraph>
+                복지포인트 설명
+                </Typography>
             </Box>
-        </React.Fragment>
+
+        </MainDrawer>
+        </Box>
     )
 }
 
