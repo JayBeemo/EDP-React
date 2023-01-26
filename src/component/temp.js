@@ -2,9 +2,7 @@
 
 import * as React from 'react';
 import './login';
-import PointReview from './pointReview';
-import Home from './home'
-import History from './history'
+import pointReview from './pointReview';
 
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
@@ -106,46 +104,15 @@ function IsLogin(){
 export default function Main(){
 //선언
     const navigate = useNavigate();
-    const [content, setContent] = useState('');
 
-    const sideButton = [
-        {
-            id: 1,
-            text: 'Home',
-            name: 'first'
-        },
-        {
-            id: 2,
-            text: 'Point Review',
-            name: 'second'
-        },
-        {
-            id: 3,
-            text: 'History',
-            name: 'third'
-        }
-    ];
-
-    const sideHandleClickButton = e => {
-        setContent(e.target);
-        console.log(e.target);
-    }
-
-    const selectComponent = {
-        first: <Home />,
-        second: <PointReview />,
-        third: <History />
-    }
-
+    const sideButton = ['Home','Point Review','내역'];
 //Session Check 첫 렌더링때 실행
     IsLogin();
-//로그아웃 핸들러
+//핸들러
     const LogoutHandleOnClick = () =>{
         navigate('/')
         window.sessionStorage.removeItem('name')
     }
-
-
 //Drawer 설정
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
@@ -216,40 +183,44 @@ export default function Main(){
             </IconButton>
             </DrawerHeader>
             <Divider />
-            {/* 사이드 메뉴 핸들링 */}
             <List>
-                { sideButton.map(data => {
-                    return(
-                        <ListItem disablePadding
-                        >
-                        <ListItemButton
-                        onClick={sideHandleClickButton}
-                        name={data.name}
-                        key={data.id}
-                        >
-                            <ListItemIcon key={data.id} >
-                                { data.id % 3 === 1 
-                                ? <HomeIcon />                               
-                                :( data.id % 3 === 2
+                { sideButton.map((text, index) => (
+                    <ListItem key={text} disablePadding
+                        onClick={(index) => {
+                            
+                        }}
+                    >
+                    <ListItemButton>
+                        <ListItemIcon>
+                            { index % 3 === 0 
+                            ? <HomeIcon/>                               
+                            :( index % 3 === 1
+                                ? <ArrowRightIcon />
+                                :( index % 3 === 2
                                     ? <ArrowRightIcon />
-                                    :( data.id % 3 === 3
-                                        ? <ArrowRightIcon />
-                                        : <ArrowRightIcon /> ) )
-                                    }
-                            </ListItemIcon>
-                            <ListItemText primary={data.text} />
-                        </ListItemButton>
-                        </ListItem>
-                    )
-                })}
+                                    : null ) )
+                                }
+                        </ListItemIcon>
+                        <ListItemText primary={text} />
+                    </ListItemButton>
+                    </ListItem>
+                ))}
             </List>
             <Divider />
         </Drawer>
         <MainDrawer open={open}>
             <DrawerHeader/>
-        <Box>
-            {content && <Box>{selectComponent[content]}</Box>}
-        </Box>
+            <Box
+                sx={{
+                    marginTop: 1,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                }}
+            >
+                {pointReview()}
+            </Box>
+
         </MainDrawer>
         </Box>
     )

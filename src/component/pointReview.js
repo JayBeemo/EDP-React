@@ -12,7 +12,10 @@ export default function PointReview(){
     return(
         <Box>
             <Typography paragraph variant='h3'>
-                HISTORY
+                복지포인트 설명 제목
+            </Typography>
+            <Typography paragraph variant='body1'>
+                복지포인트 설명
             </Typography>
         </Box>
 

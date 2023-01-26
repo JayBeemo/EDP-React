@@ -12,7 +12,7 @@ export default function PointReview(){
     return(
         <Box>
             <Typography paragraph variant='h3'>
-                HISTORY
+                HOME
             </Typography>
         </Box>
 
