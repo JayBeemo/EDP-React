@@ -107,7 +107,6 @@ export default function Main(){
 //선언
     const navigate = useNavigate();
     const [content, setContent] = useState('');
-
     const sideButton = [
         {
             id: 1,
@@ -126,9 +125,11 @@ export default function Main(){
         }
     ];
 
+//사이드 메뉴 이동 핸들러
     const sideHandleClickButton = e => {
-        setContent(e.target);
-        console.log(e.target);
+        setContent(e);
+        // console.log(e);
+        // console.log(content);
     }
 
     const selectComponent = {
@@ -143,8 +144,8 @@ export default function Main(){
     const LogoutHandleOnClick = () =>{
         navigate('/')
         window.sessionStorage.removeItem('name')
+        console.log(content)
     }
-
 
 //Drawer 설정
     const theme = useTheme();
@@ -172,7 +173,7 @@ export default function Main(){
             <IconButton
                 color="inherit"
                 aria-label="open drawer"
-                onClick={handleDrawerOpen}
+                onClick={(handleDrawerOpen)}
                 edge="start"
                 sx={{ mr: 2, ...(open && { display: 'flex' }) }}
                 
@@ -223,9 +224,11 @@ export default function Main(){
                         <ListItem disablePadding
                         >
                         <ListItemButton
-                        onClick={sideHandleClickButton}
+                        // onClick={sideHandleClickButton}
+                        onClick={()=>sideHandleClickButton(data.name)}
                         name={data.name}
                         key={data.id}
+                        value={data.name}
                         >
                             <ListItemIcon key={data.id} >
                                 { data.id % 3 === 1 
@@ -237,7 +240,7 @@ export default function Main(){
                                         : <ArrowRightIcon /> ) )
                                     }
                             </ListItemIcon>
-                            <ListItemText primary={data.text} />
+                            <ListItemText key={data.text} primary={data.text} />
                         </ListItemButton>
                         </ListItem>
                     )
@@ -246,7 +249,8 @@ export default function Main(){
             <Divider />
         </Drawer>
         <MainDrawer open={open}>
-            <DrawerHeader/>
+        <DrawerHeader/>
+        {/* 메인 컴포넌트 렌더 */}
         <Box>
             {content && <Box>{selectComponent[content]}</Box>}
         </Box>

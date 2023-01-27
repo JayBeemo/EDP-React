@@ -86,7 +86,7 @@ export default function SignIn() {
 
   // RENDER
   return (
-    <ThemeProvider theme={theme} display="fixed" height="100%">
+    <ThemeProvider theme={theme}>
       <div className='main'>
         {/* 메인페이지 동영상 */}
         <video muted autoPlay loop playsInline>

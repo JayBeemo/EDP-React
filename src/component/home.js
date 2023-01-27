@@ -10,7 +10,14 @@ export default function PointReview(){
 
 //Render
     return(
-        <Box>
+        <Box
+        sx={{
+            marginTop: 1,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
             <Typography paragraph variant='h3'>
                 HOME
             </Typography>
