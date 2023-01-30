@@ -106,7 +106,7 @@ function IsLogin(){
 export default function Main(){
 //선언
     const navigate = useNavigate();
-    const [content, setContent] = useState('');
+    const [content, setContent] = useState('first');
     const sideButton = [
         {
             id: 1,
