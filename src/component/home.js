@@ -7,7 +7,6 @@ import Box from '@mui/material/Box';
 export default function PointReview(){
 //정의
 
-
 //Render
     return(
         <Box

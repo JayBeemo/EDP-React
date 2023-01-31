@@ -1,18 +1,18 @@
 /* eslint-disabled */ 
-
 import * as React from 'react';
 import './login';
+import './main.css'
 import PointReview from './pointReview';
 import Home from './home'
 import History from './history'
-
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useState } from 'react';
 
-//MUI
+import i1 from './img/i1.png';
 
+//MUI
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -34,9 +34,10 @@ import ListItemText from '@mui/material/ListItemText';
 import HomeIcon from '@mui/icons-material/Home';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 
-//사이드메뉴 사이즈
+//메뉴바 사이즈
 const drawerWidth = 200;
 
+//메뉴바 스타일러
 const MainDrawer = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
     ({ theme, open }) => ({
       flexGrow: 1,
@@ -51,7 +52,7 @@ const MainDrawer = styled('main', { shouldForwardProp: (prop) => prop !== 'open'
           easing: theme.transitions.easing.easeOut,
           duration: theme.transitions.duration.enteringScreen,
         }),
-        marginLeft: 0,
+        marginLeft: 1,
       }),
     }),
   );
@@ -59,6 +60,8 @@ const MainDrawer = styled('main', { shouldForwardProp: (prop) => prop !== 'open'
   const AppBar = styled(MuiAppBar, {
     shouldForwardProp: (prop) => prop !== 'open',
   })(({ theme, open }) => ({
+    //AppBar 디자인 설정
+    background: 'linear-gradient(45deg, #003366 50%, #000000 80%)',
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -73,7 +76,9 @@ const MainDrawer = styled('main', { shouldForwardProp: (prop) => prop !== 'open'
     }),
   }));
 
+//Div 테마
   const DrawerHeader = styled('div')(({ theme }) => ({
+    
     display: 'flex',
     alignItems: 'center',
     padding: theme.spacing(0, 1),
@@ -140,6 +145,7 @@ export default function Main(){
 
 //Session Check 첫 렌더링때 실행
     IsLogin();
+
 //로그아웃 핸들러
     const LogoutHandleOnClick = () =>{
         navigate('/')
@@ -158,10 +164,13 @@ export default function Main(){
     const handleDrawerClose = () => {
         setOpen(false);
     };
+
+
         
 //render
     return(
         <Box sx={{ display: 'flex' }}>
+            sdge
         <CssBaseline />
         <AppBar position="fixed" open={open}>
             <Toolbar
@@ -176,19 +185,20 @@ export default function Main(){
                 onClick={(handleDrawerOpen)}
                 edge="start"
                 sx={{ mr: 2, ...(open && { display: 'flex' }) }}
-                
             >
                 <MenuIcon />
             </IconButton>
-
+            {/* 상단 메뉴바 좌측 UI */}
             <Typography variant="h6" noWrap component="div" flexGrow={1}>
-                EDP ( 비케이브 이미지 넣기 ; main 링크로 )
+                EDP ( 비케이브 이미지 넣기 ; main 링크로 , UI 좀 다듬기 ) 
             </Typography>
-
+            {/* 상단 메뉴바 우측 UI */}
+            <Typography>
+                    아이콘+기능 추가(홈페이지가기, 그룹웨어 가기, etc)
+                </Typography>    
             <IconButton
                 color="inherit"
                 edge="end"
-                
                 onClick={LogoutHandleOnClick}
             >
                 <Typography>
@@ -196,7 +206,6 @@ export default function Main(){
                 </Typography>
             </IconButton>
             </Toolbar>
-            
         </AppBar>
         <Drawer
             sx={{
@@ -212,17 +221,18 @@ export default function Main(){
             open={open}
         >
             <DrawerHeader>
+                <img src={i1} alt='' className='appBarImage'>
+                </img>
             <IconButton onClick={handleDrawerClose}>
                 {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
             </IconButton>
             </DrawerHeader>
             <Divider />
-            {/* 사이드 메뉴 핸들링 */}
+            {/* 사이드 메뉴 UI */}
             <List>
                 { sideButton.map(data => {
                     return(
-                        <ListItem disablePadding
-                        >
+                        <ListItem disablePadding>
                         <ListItemButton
                         // onClick={sideHandleClickButton}
                         onClick={()=>sideHandleClickButton(data.name)}
@@ -247,15 +257,25 @@ export default function Main(){
                 })}
             </List>
             <Divider />
+
         </Drawer>
         <MainDrawer open={open}>
         <DrawerHeader/>
         {/* 메인 컴포넌트 렌더 */}
-        <Box>
+        <Box
+        sx={{
+            flexGrow: 1,
+            // 컨포넌트 컨텐츠 센터 정렬
+            // justifyContent: "center",
+            display: "flex",
+            my: 1,
+          }}
+        >
             {content && <Box>{selectComponent[content]}</Box>}
         </Box>
         </MainDrawer>
         </Box>
+        
     )
 }
 
