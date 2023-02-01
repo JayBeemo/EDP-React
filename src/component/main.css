@@ -4,3 +4,15 @@
     height: 80%;
     margin: 0 auto 0 auto;
 }
+@font-face {
+    font-family: 'Cafe24Simplehae';
+    src: url('../fonts/Cafe24Simplehae.ttf');
+}
+@font-face {
+    font-family: 'Cafe24Ssurround';
+    src: url('../fonts/Cafe24Ssurround.ttf');
+}
+@font-face {
+    font-family: 'RecipekoreaFONT';
+    src: url('../fonts/RecipekoreaFONT.ttf');
+}

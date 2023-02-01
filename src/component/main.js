@@ -35,7 +35,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 
 //메뉴바 사이즈
-const drawerWidth = 200;
+const drawerWidth = 230;
 
 //메뉴바 스타일러
 const MainDrawer = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
@@ -78,7 +78,6 @@ const MainDrawer = styled('main', { shouldForwardProp: (prop) => prop !== 'open'
 
 //Div 테마
   const DrawerHeader = styled('div')(({ theme }) => ({
-    
     display: 'flex',
     alignItems: 'center',
     padding: theme.spacing(0, 1),
@@ -115,17 +114,17 @@ export default function Main(){
     const sideButton = [
         {
             id: 1,
-            text: 'Home',
+            text: 'HOME',
             name: 'first'
         },
         {
             id: 2,
-            text: 'Point Review',
+            text: '복지 포인트란?',
             name: 'second'
         },
         {
             id: 3,
-            text: 'History',
+            text: '포인트 사용내역',
             name: 'third'
         }
     ];
@@ -170,13 +169,12 @@ export default function Main(){
 //render
     return(
         <Box sx={{ display: 'flex' }}>
-            sdge
         <CssBaseline />
         <AppBar position="fixed" open={open}>
             <Toolbar
                 sx={{
                     display: 'flex',
-                    alignItems: 'center'
+                    alignItems: 'center',
                 }}
             >
             <IconButton
@@ -189,11 +187,11 @@ export default function Main(){
                 <MenuIcon />
             </IconButton>
             {/* 상단 메뉴바 좌측 UI */}
-            <Typography variant="h6" noWrap component="div" flexGrow={1}>
+            <Typography variant="h6" noWrap component="div" flexGrow={1} fontFamily='RecipekoreaFONT'>
                 EDP ( 비케이브 이미지 넣기 ; main 링크로 , UI 좀 다듬기 ) 
             </Typography>
             {/* 상단 메뉴바 우측 UI */}
-            <Typography>
+            <Typography fontFamily='Cafe24Simplehae'>
                     아이콘+기능 추가(홈페이지가기, 그룹웨어 가기, etc)
                 </Typography>    
             <IconButton
@@ -201,7 +199,7 @@ export default function Main(){
                 edge="end"
                 onClick={LogoutHandleOnClick}
             >
-                <Typography>
+                <Typography fontFamily='RecipekoreaFONT'>
                     LOGOUT
                 </Typography>
             </IconButton>
