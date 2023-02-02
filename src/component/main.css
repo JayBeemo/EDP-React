@@ -4,8 +4,12 @@
     height: 80%;
     margin: 0 auto 0 auto;
 }
+.serif{
+    font-family: Times, Times New Roman, Georgia, serif;
+}
+
 @font-face {
-    font-family: 'Cafe24Simplehae';
+    font-family: 'Cafe24Simplehae', 'simplehae';
     src: url('../fonts/Cafe24Simplehae.ttf');
 }
 @font-face {

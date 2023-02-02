@@ -33,9 +33,21 @@ import ListItemText from '@mui/material/ListItemText';
 // import { createTheme, ThemeProvider } from '@mui/material/styles';
 import HomeIcon from '@mui/icons-material/Home';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+// import { makeStyles } from '@mui//styles';
 
 //메뉴바 사이즈
 const drawerWidth = 230;
+
+//Global Theme
+// const theme = createTheme({
+//     typography:{
+//         fontFamily: [
+//             'simplehae',
+//             'Cafe24Ssurround',
+//             'RecipekoreaFONT'
+//         ].join(',')
+//     }
+// });
 
 //메뉴바 스타일러
 const MainDrawer = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
@@ -110,6 +122,7 @@ function IsLogin(){
 export default function Main(){
 //선언
     const navigate = useNavigate();
+
     const [content, setContent] = useState('first');
     const sideButton = [
         {
@@ -188,7 +201,7 @@ export default function Main(){
             </IconButton>
             {/* 상단 메뉴바 좌측 UI */}
             <Typography variant="h6" noWrap component="div" flexGrow={1} fontFamily='RecipekoreaFONT'>
-                EDP ( 비케이브 이미지 넣기 ; main 링크로 , UI 좀 다듬기 ) 
+                B.CAVE Employee Discount Point 
             </Typography>
             {/* 상단 메뉴바 우측 UI */}
             <Typography fontFamily='Cafe24Simplehae'>
@@ -248,14 +261,13 @@ export default function Main(){
                                         : <ArrowRightIcon /> ) )
                                     }
                             </ListItemIcon>
-                            <ListItemText key={data.text} primary={data.text} />
+                            <ListItemText key={data.text} secondary={data.text} />
                         </ListItemButton>
                         </ListItem>
                     )
                 })}
             </List>
             <Divider />
-
         </Drawer>
         <MainDrawer open={open}>
         <DrawerHeader/>
@@ -273,6 +285,7 @@ export default function Main(){
         </Box>
         </MainDrawer>
         </Box>
+        
         
     )
 }

@@ -20,6 +20,9 @@ export default function PointReview(){
             <Typography paragraph variant='h3'>
                 대시보드
             </Typography>
+        <Box>
+            dgerg
+        </Box>
         </Box>
 
     )
