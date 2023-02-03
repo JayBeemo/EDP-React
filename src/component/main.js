@@ -53,7 +53,8 @@ const drawerWidth = 230;
 const MainDrawer = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
     ({ theme, open }) => ({
       flexGrow: 1,
-      padding: theme.spacing(3),
+      padding: theme.spacing(0),
+      height: 720,
       transition: theme.transitions.create('margin', {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
@@ -64,7 +65,7 @@ const MainDrawer = styled('main', { shouldForwardProp: (prop) => prop !== 'open'
           easing: theme.transitions.easing.easeOut,
           duration: theme.transitions.duration.enteringScreen,
         }),
-        marginLeft: 1,
+        marginLeft: 0,
       }),
     }),
   );
@@ -92,7 +93,7 @@ const MainDrawer = styled('main', { shouldForwardProp: (prop) => prop !== 'open'
   const DrawerHeader = styled('div')(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
-    padding: theme.spacing(0, 1),
+    padding: theme.spacing(0, 2),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
     justifyContent: 'flex-end',
@@ -276,17 +277,16 @@ export default function Main(){
         sx={{
             flexGrow: 1,
             // 컨포넌트 컨텐츠 센터 정렬
-            // justifyContent: "center",
-            display: "flex",
-            my: 1,
+            justifyContent: "center",
+            display: "content",
+            width: '100%',
+            height: '100%',
           }}
         >
             {content && <Box>{selectComponent[content]}</Box>}
         </Box>
         </MainDrawer>
         </Box>
-        
-        
     )
 }
 
