@@ -29,17 +29,17 @@ export default function dashboard(){
         <Grid container spacing={2}>
             <Grid item xs={4}>
             <Item>
-                분기별 기본 할당 포인트
+                <Typography paragraph variant='h6' textAlign={'center'} secondary >분기별 기본 할당 포인트</Typography>
             </Item>
             </Grid>
             <Grid item xs={4}>
             <Item>
-                분기별 사용 포인트
+                <Typography paragraph variant='h6' textAlign={'center'} secondary >분기별 사용 포인트</Typography>
             </Item>
             </Grid>
             <Grid item xs={4}>
             <Item>
-                분기별 잔여 포인트
+                <Typography paragraph variant='h6' textAlign={'center'} secondary >분기별 잔여 포인트</Typography>
             </Item>
             </Grid>
             <Grid item xs={12}>
