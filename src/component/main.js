@@ -36,18 +36,13 @@ import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 // import { makeStyles } from '@mui//styles';
 
 //메뉴바 사이즈
+
 const drawerWidth = 230;
 
-//Global Theme
-// const theme = createTheme({
-//     typography:{
-//         fontFamily: [
-//             'simplehae',
-//             'Cafe24Ssurround',
-//             'RecipekoreaFONT'
-//         ].join(',')
-//     }
-// });
+//DB
+
+
+
 
 //메뉴바 스타일러
 const MainDrawer = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(

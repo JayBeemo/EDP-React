@@ -129,7 +129,7 @@ export default function SignIn() {
                 required
                 fullWidth
                 id={FormData.name}
-                label="성명"
+                label="성명(CUSTNM)"
                 name="name"
                 autoComplete="name"
                 // autoFocus
@@ -147,7 +147,7 @@ export default function SignIn() {
                 required
                 fullWidth
                 name="password"
-                label="비밀번호"
+                label="비밀번호(CUSTPW)"
                 type="password"
                 id="password"
                 autoComplete="current-password"
