@@ -7,8 +7,8 @@ import Home from './home'
 import History from './history'
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { getConnection, executeQuery } from './dbconfig';
 
 import i1 from './img/i1.png';
 
@@ -38,10 +38,6 @@ import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 //메뉴바 사이즈
 
 const drawerWidth = 230;
-
-//DB
-
-
 
 
 //메뉴바 스타일러
@@ -116,6 +112,23 @@ function IsLogin(){
 }
 //react
 export default function Main(){
+//DB
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        async function fetchData(){
+            try{
+                const connection = await getConnection();
+                const result = await executeQuery(connection, 'SELECT * FROM V_CUSTINFO_MAST');
+                setData(result.rows);
+                connection.close();
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        fetchData();
+    }, []);
+
 //선언
     const navigate = useNavigate();
 
