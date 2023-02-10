@@ -34,7 +34,7 @@ export default function dashboard(){
         </Typography>
         <Grid container spacing={2}>
             <Grid item xs={4}>
-            <Item sx={{
+            <Item elevation={3} sx={{
                 background: 'linear-gradient(rgba(10,50,100,0.5),transparent)',
                 backgroundColor: 'white'
             }}>
@@ -47,7 +47,7 @@ export default function dashboard(){
             </Item>
             </Grid>
             <Grid item xs={4}>
-            <Item sx={{
+            <Item elevation={3} sx={{
                 background: 'linear-gradient(rgba(10,50,100,0.5),transparent)',
                 backgroundColor: 'white'
             }}>
@@ -60,7 +60,7 @@ export default function dashboard(){
             </Item>
             </Grid>
             <Grid item xs={4}>
-            <Item sx={{
+            <Item elevation={3} sx={{
                 background: 'linear-gradient(rgba(10,50,100,0.5),transparent)',
                 backgroundColor: 'white'
             }}>
@@ -73,14 +73,14 @@ export default function dashboard(){
             </Item>
             </Grid>
             <Grid item xs={12}>
-            <Item>
+            <Item elevation={3}>
                 월별 사용량 차트 그래프
                 (꺽은선 그래프)
                 NIVO 활용
             </Item>
             </Grid>
             <Grid item xs={12}>
-            <Item>
+            <Item elevation={3}>
                 최근 구매 내역(5건 정도, 더보기 추가-클릭 시 사용 내역 Component 렌더)
             </Item>
             </Grid>
