@@ -38,8 +38,12 @@ export default function dashboard(){
                 background: 'linear-gradient(rgba(10,50,100,0.5),transparent)',
                 backgroundColor: 'white'
             }}>
-                <Typography paragraph variant='h5' textAlign={'center'} secondary >분기별 기본 할당 포인트</Typography>
-                <Typography paragraph variant='h7' textAlign={'center'} fontFamily='RecipekoreaFONT' >(ALLOC_POINT)</Typography>
+                <Typography paragraph variant='h5' textAlign={'center'} >분기별 기본 포인트</Typography>
+                <Typography 
+                sx={{
+                    color: 'black',
+                }}
+                paragraph variant='h7' textAlign={'center'} fontFamily='RecipekoreaFONT' >(ALLOC_POINT)</Typography>
             </Item>
             </Grid>
             <Grid item xs={4}>
@@ -47,8 +51,12 @@ export default function dashboard(){
                 background: 'linear-gradient(rgba(10,50,100,0.5),transparent)',
                 backgroundColor: 'white'
             }}>
-                <Typography paragraph variant='h5' textAlign={'center'} secondary >분기별 사용 포인트</Typography>
-                <Typography paragraph variant='h7' textAlign={'center'} fontFamily='RecipekoreaFONT' >(USE_POINT)</Typography>
+                <Typography paragraph variant='h5' textAlign={'center'} >분기별 사용 포인트</Typography>
+                <Typography 
+                    sx={{
+                        color: 'black',
+                    }}
+                paragraph variant='h7' textAlign={'center'} fontFamily='RecipekoreaFONT' >(USE_POINT)</Typography>
             </Item>
             </Grid>
             <Grid item xs={4}>
@@ -56,8 +64,12 @@ export default function dashboard(){
                 background: 'linear-gradient(rgba(10,50,100,0.5),transparent)',
                 backgroundColor: 'white'
             }}>
-                <Typography paragraph variant='h5' textAlign={'center'} secondary >분기별 잔여 포인트</Typography>
-                <Typography paragraph variant='h7' textAlign={'center'} fontFamily='RecipekoreaFONT' >(REMAIN_POINT)</Typography>
+                <Typography paragraph variant='h5' textAlign={'center'} >분기별 잔여 포인트</Typography>
+                <Typography 
+                    sx={{
+                        color: 'black',
+                    }}
+                paragraph variant='h7' textAlign={'center'} fontFamily='RecipekoreaFONT' >(REMAIN_POINT)</Typography>
             </Item>
             </Grid>
             <Grid item xs={12}>
