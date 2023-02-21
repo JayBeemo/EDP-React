@@ -11,7 +11,6 @@ import Home from './component/home'
 import History from './component/history'
 
 function App() {
-
   return (
     <div>
       <Routes>

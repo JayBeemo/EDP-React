@@ -12,7 +12,7 @@ export default function PointReview(){
     return(
         <Box>
             <Typography paragraph variant='h3'>
-                HISTORY
+                포인트 사용내역 (Table)
             </Typography>
         </Box>
 
