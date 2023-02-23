@@ -111,10 +111,6 @@ function IsLogin(){
 }
 //react
 export default function Main(){
-//DB
-
-
-
 
 //선언
     const navigate = useNavigate();
