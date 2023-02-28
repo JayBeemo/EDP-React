@@ -13,6 +13,9 @@ import History from './component/history'
 function App() {
 
   return (
+    // 웹사이트 라우팅
+    // 로그인 페이지 : login.js
+    // 기본 페이지는 : main.js 내 home.js 컴포넌트
     <div>
       <Routes>
         <Route exact path="/" element={<Login />}/>

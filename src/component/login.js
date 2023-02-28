@@ -9,8 +9,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-// import FormControlLabel from '@mui/material/FormControlLabel';
-// import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -22,7 +20,6 @@ import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
   // 선언
-
 
 
   // Footer 카피라이트
@@ -39,7 +36,7 @@ function Copyright(props) {
   );
 }
 
-  // 테마 설정
+  // 테마 설정 - lightBlue를 primary 컬러로 지정
 const theme = createTheme({
   palette:{
     primary:{
@@ -50,7 +47,8 @@ const theme = createTheme({
 
   // React
 export default function SignIn() {
-  //navigation 정의
+
+  //로그인 성공 시 main으로 이동하기 위한 navigation 정의
   const navigate = useNavigate();
 
   //submit 이벤트 처리
@@ -63,15 +61,17 @@ export default function SignIn() {
   // Session Storage 저장
     window.sessionStorage.removeItem('name')
     window.sessionStorage.setItem('name',(data.get('name')))
-
+  
+  // 콘솔을 통한 로그인 입력 정보 로그 확인 - 추후 문제 없으면 주석처리 예정
     console.log({
       name: data.get('name'),
       password: data.get('password'),
       setName : sessionStorage.getItem('name')
     });
 
-  // 계정 정보 입력 체크
+  // 계정 정보 입력 체크 - 추후 회원 정보와 비교 조건 추가
     if( data.get('name') === '' || data.get('password') === ''){
+
   // alert ( sweetalert2 활용 )
       Swal.fire({
         icon: "warning",
