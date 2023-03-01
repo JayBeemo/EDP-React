@@ -9,6 +9,7 @@ import Main from './component/main.js';
 import PointReview from './component/pointReview';
 import Home from './component/home'
 import History from './component/history'
+import ReactProxy from './component/reactProxy'
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
         <Route exact path="/home" element={<Home />}/>
         <Route exact path="/pointreview" element={<PointReview />}/>
         <Route exact path="/history" element={<History />}/>
+        <Route exact path="/reactProxy" element={<ReactProxy />}/>
       </Routes>
     </div>
   );
