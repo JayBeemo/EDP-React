@@ -16,7 +16,8 @@ function App() {
   return (
     // 웹사이트 라우팅
     // 로그인 페이지 : login.js
-    // 기본 페이지는 : main.js 내 home.js 컴포넌트
+    // 기본 페이지 : main.js 내 home.js 컴포넌트
+    // 프록시 페이지 : reactProxy.js
     <div>
       <Routes>
         <Route exact path="/" element={<Login />}/>

@@ -1,14 +1,15 @@
-import react, {Component} from 'react';
+// import react, {Component} from 'react';
+import {Component} from 'react';
 
 class reactProxy extends Component {
     componentDidMount = async() => {
         const response = await fetch('/users');
-        const body = await response.text();
-        console.log("body : " + body);
+        const body = await response.json();
+        console.log("body.message : " + body.message);
     }
     render(){
         return(
-            <><h1>Proxy Call Node Api</h1></>
+            <><h1>[Proxy] Call Node Api Get</h1></>
         )
     }
 }
