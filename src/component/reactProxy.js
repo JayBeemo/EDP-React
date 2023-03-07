@@ -3,7 +3,7 @@ import {Component} from 'react';
 
 class reactProxy extends Component {
     componentDidMount = async() => {
-        const response = await fetch('/users');
+        const response = await fetch('/api/dbconn');
         const body = await response.json();
         console.log("body.message : " + body.message);
     }
