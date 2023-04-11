@@ -33,9 +33,9 @@ import ListItemText from '@mui/material/ListItemText';
 import HomeIcon from '@mui/icons-material/Home';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 // import { makeStyles } from '@mui//styles';
+import axios from 'axios';
 
 //메뉴바 사이즈
-
 const drawerWidth = 230;
 
 
@@ -89,10 +89,18 @@ const MainDrawer = styled('main', { shouldForwardProp: (prop) => prop !== 'open'
     justifyContent: 'flex-end',
   }));
 
-//Session Check
+//Session Check ( ☆ Axios로 로그인 정보 체크 )
 function IsLogin(){
     const navigate = useNavigate();
+
     useEffect(()=>{
+        axios({
+            url: 'http://localhost:5000/api/apitool?type=auth',
+            method: 'get',
+        }).then(function(response){
+            console.log(response.data)
+        })
+
         if(window.sessionStorage.getItem('name') !== '1' ){
             Swal.fire({
                 icon: "warning",

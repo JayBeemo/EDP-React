@@ -55,24 +55,24 @@ export default function SignIn() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-  // 계정정보 Form 생성
+    // 계정정보 Form 생성
     const data = new FormData(event.currentTarget);
 
-  // Session Storage 저장
+    // Session Storage 저장
     window.sessionStorage.removeItem('name')
     window.sessionStorage.setItem('name',(data.get('name')))
   
-  // 콘솔을 통한 로그인 입력 정보 로그 확인 - 추후 문제 없으면 주석처리 예정
+    // 콘솔을 통한 로그인 입력 정보 로그 확인 - 추후 문제 없으면 주석처리 예정
     console.log({
       name: data.get('name'),
       password: data.get('password'),
       setName : sessionStorage.getItem('name')
     });
 
-  // 계정 정보 입력 체크 - 추후 회원 정보와 비교 조건 추가
+    // 계정 정보 입력 체크 - 추후 회원 정보와 비교 조건 추가
     if( data.get('name') === '' || data.get('password') === ''){
 
-  // alert ( sweetalert2 활용 )
+    // alert ( sweetalert2 활용 )
       Swal.fire({
         icon: "warning",
         title: "접속 에러",
