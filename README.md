@@ -1,3 +1,10 @@
+# 비케이브 전사 복지포인트 조회 사이트 개발 진행
+
+기간 : 2023-02-15 ~ 현재 진행중
+
+REACT SERVER : EDP
+API SERVER : EDP-NODE
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
