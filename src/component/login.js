@@ -60,17 +60,19 @@ export default function SignIn() {
 
     // Session Storage 저장
     window.sessionStorage.removeItem('name')
+    window.sessionStorage.removeItem('pwd')
     window.sessionStorage.setItem('name',(data.get('name')))
+    window.sessionStorage.setItem('pwd',(data.get('pwd')))
   
     // 콘솔을 통한 로그인 입력 정보 로그 확인 - 추후 문제 없으면 주석처리 예정
     console.log({
       name: data.get('name'),
-      password: data.get('password'),
+      password: data.get('pwd'),
       setName : sessionStorage.getItem('name')
     });
 
     // 계정 정보 입력 체크 - 추후 회원 정보와 비교 조건 추가
-    if( data.get('name') === '' || data.get('password') === ''){
+    if( data.get('name') === '' || data.get('pwd') === ''){
 
     // alert ( sweetalert2 활용 )
       Swal.fire({
@@ -148,10 +150,10 @@ export default function SignIn() {
                 margin="normal"
                 required
                 fullWidth
-                name="password"
+                name="pwd"
                 label="비밀번호(CUSTPW)"
                 type="password"
-                id="password"
+                id="pwd"
                 autoComplete="current-password"
               />
               {/* <FormControlLabel
