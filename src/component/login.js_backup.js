@@ -74,19 +74,6 @@ export default function SignIn() {
       setName : sessionStorage.getItem('name')
     });
 
-    // axios API 통신
-    axios.post('/api/apitool', {
-      type: 'auth',
-      custid: data.get('name'),
-      custpw: data.get('pwd')
-    })
-    .then(function(response){
-      console.log(response);
-    })
-    .catch(function(error) {
-      console.log(error);
-    });
-
     // 계정 정보 입력 체크 - 추후 회원 정보와 비교 조건 추가
     if( data.get('name') === '' || data.get('pwd') === ''){
 

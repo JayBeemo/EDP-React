@@ -11,7 +11,6 @@ import Home from './component/home'
 import History from './component/history'
 
 function App() {
-
   return (
     // 웹사이트 라우팅
     // 로그인 페이지 : login.js

@@ -33,7 +33,7 @@ import ListItemText from '@mui/material/ListItemText';
 import HomeIcon from '@mui/icons-material/Home';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 // import { makeStyles } from '@mui//styles';
-// import axios from 'axios';
+import axios from 'axios';
 
 //메뉴바 사이즈
 const drawerWidth = 230;
@@ -88,13 +88,64 @@ const MainDrawer = styled('main', { shouldForwardProp: (prop) => prop !== 'open'
     justifyContent: 'flex-end',
   }));
 
+//Session Check ( ☆ Axios로 로그인 정보 체크 )
+// function IsLogin(){
+//     const navigate = useNavigate();
+//     try{
+//         const custinfo = await axios.post({
+//             url: 'http://localhost/api/apitool',
+//             method: 'post',
+//             type: "auth",
+//             custid: window.sessionStorage.getItem('name'),
+//             custpw: window.sessionStorage.getItem('pwd')
+//         })
+        
+//     }catch(ex){
+//         console.log(ex);
+//     }
+
+//     useEffect(()=>{
+//         if(window.sessionStorage.getItem('name') !== '1' ){
+//             Swal.fire({
+//                 icon: "warning",
+//                 title: "접속 에러",
+//                 html: `<p>세션 체크 에러</p>`,
+//                 confirmButtonText: "확인",
+//                 confirmButtonColor: "#148CFF"
+//               })
+//             window.sessionStorage.removeItem('name')
+//             navigate('/login')
+//         }
+//         // else{
+//         //     alert('로그인 완료');
+//         // }
+//     },[navigate]);
+// }
+
+async function checkSession() {
+    try {
+      const custinfo = await axios.post('http://localhost:3000/api/apitool', {
+        type: 'auth',
+        custid: window.sessionStorage.getItem('name'),
+        custpw: window.sessionStorage.getItem('pwd')
+      }).then(function(response){
+        console.log(response);
+      }
+      );
+      return custinfo;
+    } catch (ex) {
+      console.log(ex);
+      throw ex;
+    }
+  }
+  
   function IsLogin() {
     const navigate = useNavigate();
   
     useEffect(() => {
       async function fetchData() {
         try {
-         
+          const custinfo = await checkSession();
           if (window.sessionStorage.getItem('name') !== '1') {
             Swal.fire({
               icon: "warning",
@@ -107,6 +158,7 @@ const MainDrawer = styled('main', { shouldForwardProp: (prop) => prop !== 'open'
             navigate('/login');
           }
            else{
+            console.log(custinfo);
             alert('로그인 완료');
            }
         } catch (ex) {
