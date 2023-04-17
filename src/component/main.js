@@ -5,9 +5,10 @@ import './main.css'
 import PointReview from './pointReview';
 import Home from './home'
 import History from './history'
-import Swal from 'sweetalert2';
+// import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+// import { useState, useEffect } from 'react';
 
 import i1 from './img/i1.png';
 
@@ -88,34 +89,34 @@ const MainDrawer = styled('main', { shouldForwardProp: (prop) => prop !== 'open'
     justifyContent: 'flex-end',
   }));
 
-  function IsLogin() {
-    const navigate = useNavigate();
+  // function IsLogin() {
+  //   const navigate = useNavigate();
   
-    useEffect(() => {
-      async function fetchData() {
-        try {
+  //   useEffect(() => {
+  //     async function fetchData() {
+  //       try {
          
-          if (window.sessionStorage.getItem('name') !== '1') {
-            Swal.fire({
-              icon: "warning",
-              title: "접속 에러",
-              html: `<p>세션 체크 에러</p>`,
-              confirmButtonText: "확인",
-              confirmButtonColor: "#148CFF"
-            });
-            window.sessionStorage.removeItem('name');
-            navigate('/login');
-          }
-           else{
-            alert('로그인 완료');
-           }
-        } catch (ex) {
-          console.log(ex);
-        }
-      }
-      fetchData();
-    }, [navigate]);
-  }
+  //         if (window.sessionStorage.getItem('name') !== '1') {
+  //           Swal.fire({
+  //             icon: "warning",
+  //             title: "접속 에러",
+  //             html: `<p>세션 체크 에러</p>`,
+  //             confirmButtonText: "확인",
+  //             confirmButtonColor: "#148CFF"
+  //           });
+  //           window.sessionStorage.removeItem('name');
+  //           navigate('/login');
+  //         }
+  //          else{
+  //           alert('로그인 완료');
+  //          }
+  //       } catch (ex) {
+  //         console.log(ex);
+  //       }
+  //     }
+  //     fetchData();
+  //   }, [navigate]);
+  // }
 
 //react
 export default function Main(){
@@ -156,7 +157,8 @@ export default function Main(){
     }
 
 //Session Check 첫 렌더링때 실행
-    IsLogin();
+    // IsLogin();
+  
 
 //로그아웃 핸들러
     const LogoutHandleOnClick = () =>{

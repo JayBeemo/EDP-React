@@ -57,53 +57,55 @@ export default function SignIn() {
   //submit 이벤트 처리
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    // 계정정보 Form 생성
     const data = new FormData(event.currentTarget);
-
-    // Session Storage 저장
     window.sessionStorage.removeItem('name')
     window.sessionStorage.removeItem('pwd')
-    window.sessionStorage.setItem('name',(data.get('name')))
-    window.sessionStorage.setItem('pwd',(data.get('pwd')))
-  
-    // 콘솔을 통한 로그인 입력 정보 로그 확인 - 추후 문제 없으면 주석처리 예정
+    window.sessionStorage.setItem('name', data.get('name'))
+    window.sessionStorage.setItem('pwd', data.get('pwd'))
     console.log({
       name: data.get('name'),
       password: data.get('pwd'),
-      setName : sessionStorage.getItem('name')
+      setName: sessionStorage.getItem('name')
     });
-
-    // axios API 통신
-    axios.post('/api/apitool', {
-      type: 'auth',
-      custid: data.get('name'),
-      custpw: data.get('pwd')
-    })
-    .then(function(response){
-      console.log(response);
-    })
-    .catch(function(error) {
-      console.log(error);
-    });
-
-    // 계정 정보 입력 체크 - 추후 회원 정보와 비교 조건 추가
-    if( data.get('name') === '' || data.get('pwd') === ''){
-
-    // alert ( sweetalert2 활용 )
-      Swal.fire({
-        icon: "warning",
-        title: "접속 에러",
-        html: `<p>계정 정보 입력 에러</p>`,
-        confirmButtonText: "확인",
-        confirmButtonColor: "#148CFF"
+  
+    axios.post('/api/apitool',null,  {
+        type: 'auth',
+        custid: data.get('name'),
+        custpw: data.get('pwd')
+      }).then(function(response) {
+        console.log(response.data);
+        const custid = response.data.custid;
+        const custpw = response.data.custpw;
+        console.log(custid);
+        console.log(custpw);
+  
+        if (data.get('name') === '' || data.get('pwd') === '') {
+          Swal.fire({
+            icon: 'warning',
+            title: '접속 에러',
+            html: `<p>계정 정보 입력 에러</p>`,
+            confirmButtonText: '확인',
+            confirmButtonColor: '#148CFF'
+          });
+          navigate('/login');
+        } else if (data.get('name') === custid || data.get('pwd') === custpw) {
+          Swal.fire({
+            icon: 'warning',
+            title: '접속 에러',
+            html: `<p>없는 계정입니다.</p>`,
+            confirmButtonText: '확인',
+            confirmButtonColor: '#148CFF'
+          });
+          navigate('/login');
+        } else {
+          navigate('/main');
+        }
       })
-      navigate('/login');
-    }else{
-      navigate('/main');
-    }
-
-  }
+      .catch(function(error) {
+        console.log(error);
+      });
+  };
+  
 
   // RENDER
   return (
