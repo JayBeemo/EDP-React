@@ -7,6 +7,7 @@ import Home from './home'
 import History from './history'
 // import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useState } from 'react';
 // import { useState, useEffect } from 'react';
 
@@ -89,37 +90,26 @@ const MainDrawer = styled('main', { shouldForwardProp: (prop) => prop !== 'open'
     justifyContent: 'flex-end',
   }));
 
-  // function IsLogin() {
-  //   const navigate = useNavigate();
-  
-  //   useEffect(() => {
-  //     async function fetchData() {
-  //       try {
-         
-  //         if (window.sessionStorage.getItem('name') !== '1') {
-  //           Swal.fire({
-  //             icon: "warning",
-  //             title: "접속 에러",
-  //             html: `<p>세션 체크 에러</p>`,
-  //             confirmButtonText: "확인",
-  //             confirmButtonColor: "#148CFF"
-  //           });
-  //           window.sessionStorage.removeItem('name');
-  //           navigate('/login');
-  //         }
-  //          else{
-  //           alert('로그인 완료');
-  //          }
-  //       } catch (ex) {
-  //         console.log(ex);
-  //       }
-  //     }
-  //     fetchData();
-  //   }, [navigate]);
-  // }
-
 //react
 export default function Main(){
+
+    const location = useLocation();
+
+    const c_id = location.state.c_id;
+    const c_nm = location.state.c_nm;
+    const c_pw = location.state.c_pw;
+    const c_email = location.state.c_email;
+    const c_alloc_point = location.state.c_alloc_point;
+    const c_use_point = location.state.c_use_point;
+    const c_remain_point = location.state.c_remain_point;
+
+    console.log("welcome " + c_nm + "\n");
+    console.log("-------------cust info--------------\n");
+    console.log(" ID : " + c_id + " \n");
+    console.log(" EMAIL : " + c_email + " \n");
+    console.log(" 적립된 포인트 : " + c_alloc_point + " \n");
+    console.log(" 사용한 포인트 : " + c_use_point + " \n");
+    console.log(" 남은 포인트 : " + c_remain_point + " \n");
 
 //선언
     const navigate = useNavigate();
@@ -146,19 +136,22 @@ export default function Main(){
 //사이드 메뉴 이동 핸들러
     const sideHandleClickButton = e => {
         setContent(e);
-        // console.log(e);
-        // console.log(content);
     }
 
     const selectComponent = {
-        first: <Home />,
+        first: <Home 
+        c_id={c_id} 
+        c_nm={c_nm} 
+        c_pw={c_pw}
+        c_email={c_email} 
+        c_alloc_point={c_alloc_point} 
+        c_use_point={c_use_point} 
+        c_remain_point={c_remain_point}
+        />,
         second: <PointReview />,
         third: <History />
     }
 
-//Session Check 첫 렌더링때 실행
-    // IsLogin();
-  
 
 //로그아웃 핸들러
     const LogoutHandleOnClick = () =>{

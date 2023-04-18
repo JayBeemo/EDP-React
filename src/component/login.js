@@ -23,7 +23,6 @@ import axios from 'axios';
 
   // 선언
 
-
   // Footer 카피라이트
 function Copyright(props) {
   return (
@@ -68,17 +67,15 @@ export default function SignIn() {
       setName: sessionStorage.getItem('name')
     });
   
-    axios.post('/api/apitool',null,  {
+    axios.post('/api/apitool',{
         type: 'auth',
         custid: data.get('name'),
         custpw: data.get('pwd')
       }).then(function(response) {
-        console.log(response.data);
-        const custid = response.data.custid;
-        const custpw = response.data.custpw;
-        console.log(custid);
-        console.log(custpw);
-  
+        //response 한 데이터 셋업
+        let json = JSON.parse(JSON.stringify(response.data));
+
+        //로그인 검증
         if (data.get('name') === '' || data.get('pwd') === '') {
           Swal.fire({
             icon: 'warning',
@@ -88,21 +85,38 @@ export default function SignIn() {
             confirmButtonColor: '#148CFF'
           });
           navigate('/login');
-        } else if (data.get('name') === custid || data.get('pwd') === custpw) {
+        } else if (data.get('name') !== json[0].CUSTNM || data.get('pwd') !== json[0].CUSTPW ) {
           Swal.fire({
             icon: 'warning',
             title: '접속 에러',
-            html: `<p>없는 계정입니다.</p>`,
+            html: `<p>없는 계정입니다. 관리자에게 문의해주세요.</p>`,
             confirmButtonText: '확인',
             confirmButtonColor: '#148CFF'
           });
           navigate('/login');
         } else {
-          navigate('/main');
+          navigate('/main', {
+            state:{
+              c_id: json[0].CUSTID,
+              c_nm: json[0].CUSTNM,
+              c_pw: json[0].CUSTPW,
+              c_email: json[0].EMAIL,
+              c_alloc_point: json[0].ALLOC_POINT,
+              c_use_point: json[0].USE_POINT,
+              c_remain_point: json[0].REMAIN_POINT
+            }
+          });
         }
       })
       .catch(function(error) {
         console.log(error);
+        Swal.fire({
+          icon: 'warning',
+          title: '접속 에러',
+          html: `<p>없는 계정입니다. 관리자에게 문의해주세요.</p>`,
+          confirmButtonText: '확인',
+          confirmButtonColor: '#148CFF'
+        });
       });
   };
   

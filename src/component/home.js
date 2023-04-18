@@ -7,6 +7,7 @@ import { styled } from '@mui/material/styles';
 import { Paper } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { Container } from '@mui/system';
+import shadows from '@mui/material/styles/shadows';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -17,9 +18,20 @@ const Item = styled(Paper)(({ theme }) => ({
   }));
 
 
-export default function dashboard(){
+export default function dashboard(props){
 //정의
+    let {
+        c_id,
+        c_nm,
+        c_pw,
+        c_email,
+        c_alloc_point,
+        c_use_point,
+        c_remain_point } = props;
 
+        c_alloc_point = c_alloc_point.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        c_use_point = c_use_point.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        c_remain_point = c_remain_point.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 //Render
     return(
         <Container fixed maxWidth='xl' 
@@ -30,7 +42,7 @@ export default function dashboard(){
              }}
         >
         <Typography paragraph variant='h4' textAlign={'center'} fontFamily='Cafe24Simplehae'>
-            (CUSTID) 님의 DASHBOARD
+            {c_nm} 님의 DASHBOARD
         </Typography>
         <Grid container spacing={2}>
             <Grid item xs={4}>
@@ -38,12 +50,13 @@ export default function dashboard(){
                 background: 'linear-gradient(rgba(10,50,100,0.5),transparent)',
                 backgroundColor: 'white'
             }}>
-                <Typography paragraph variant='h5' textAlign={'center'} >분기별 기본 포인트</Typography>
+                <Typography paragraph variant='h5' textAlign={'center'} >분기 적립 포인트</Typography>
                 <Typography 
                 sx={{
                     color: 'black',
+                    textShadow: '1px 1px 1px WHITE'
                 }}
-                paragraph variant='h7' textAlign={'center'} fontFamily='RecipekoreaFONT' >(ALLOC_POINT)</Typography>
+                paragraph variant='h6' textAlign={'center'} fontFamily='RecipekoreaFONT' >{c_alloc_point} 원</Typography>
             </Item>
             </Grid>
             <Grid item xs={4}>
@@ -51,12 +64,13 @@ export default function dashboard(){
                 background: 'linear-gradient(rgba(10,50,100,0.5),transparent)',
                 backgroundColor: 'white'
             }}>
-                <Typography paragraph variant='h5' textAlign={'center'} >분기별 사용 포인트</Typography>
+                <Typography paragraph variant='h5' textAlign={'center'} >사용 포인트</Typography>
                 <Typography 
                     sx={{
-                        color: 'black',
+                        color: 'RED',
+                        textShadow: '1px 1px 1px WHITE'
                     }}
-                paragraph variant='h7' textAlign={'center'} fontFamily='RecipekoreaFONT' >(USE_POINT)</Typography>
+                paragraph variant='h6' textAlign={'center'} fontFamily='RecipekoreaFONT' >{c_use_point} 원</Typography>
             </Item>
             </Grid>
             <Grid item xs={4}>
@@ -64,12 +78,13 @@ export default function dashboard(){
                 background: 'linear-gradient(rgba(10,50,100,0.5),transparent)',
                 backgroundColor: 'white'
             }}>
-                <Typography paragraph variant='h5' textAlign={'center'} >분기별 잔여 포인트</Typography>
+                <Typography paragraph variant='h5' textAlign={'center'} >잔여 포인트</Typography>
                 <Typography 
                     sx={{
-                        color: 'black',
+                        color: '#50AF49',
+                        textShadow: '1px 1px 1px WHITE'
                     }}
-                paragraph variant='h7' textAlign={'center'} fontFamily='RecipekoreaFONT' >(REMAIN_POINT)</Typography>
+                paragraph variant='h6' textAlign={'center'} fontFamily='RecipekoreaFONT' >{c_remain_point} 원</Typography>
             </Item>
             </Grid>
             <Grid item xs={12}>
