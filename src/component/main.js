@@ -103,14 +103,6 @@ export default function Main(){
     const c_use_point = location.state.c_use_point;
     const c_remain_point = location.state.c_remain_point;
 
-    console.log("welcome " + c_nm + "\n");
-    console.log("-------------cust info--------------\n");
-    console.log(" ID : " + c_id + " \n");
-    console.log(" EMAIL : " + c_email + " \n");
-    console.log(" 적립된 포인트 : " + c_alloc_point + " \n");
-    console.log(" 사용한 포인트 : " + c_use_point + " \n");
-    console.log(" 남은 포인트 : " + c_remain_point + " \n");
-
 //선언
     const navigate = useNavigate();
 
@@ -195,8 +187,8 @@ export default function Main(){
                 <MenuIcon />
             </IconButton>
             {/* 상단 메뉴바 좌측 UI */}
-            <Typography variant="h6" noWrap component="div" flexGrow={1} fontFamily='RecipekoreaFONT'>
-                B.CAVE Employee Discount Point 
+            <Typography variant="h5" noWrap component="div" flexGrow={1} fontFamily='Cafe24Simplehae'>
+                B.CAVE EMPLOYEE DISCOUNT POINT 
             </Typography>
             {/* 상단 메뉴바 우측 UI */}
             <Typography fontFamily='Cafe24Simplehae'>

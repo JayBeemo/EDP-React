@@ -69,7 +69,7 @@ export default function SignIn() {
   
     axios.post('/api/apitool',{
         type: 'auth',
-        custid: data.get('name'),
+        custnm: data.get('name'),
         custpw: data.get('pwd')
       }).then(function(response) {
         //response 한 데이터 셋업
