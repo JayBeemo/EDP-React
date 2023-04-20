@@ -1,8 +1,12 @@
 
 import * as React from 'react';
 import './home.css';
-
+import { useEffect } from 'react';
 import axios from 'axios';
+
+//이력 테이블에 필요한 라이브러리 import
+import { useTable } from "react-table";
+import { useMemo } from 'react';
 
 //MUI
 import Typography from '@mui/material/Typography';
@@ -12,7 +16,6 @@ import Grid from '@mui/material/Grid';
 import { Container } from '@mui/system';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import { useEffect } from 'react';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -24,6 +27,9 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function Dashboard(props){
 //정의
+
+    let listArr = [];
+    
     let {
         c_id,
         c_nm,
@@ -45,9 +51,8 @@ export default function Dashboard(props){
         //response 한 데이터 셋업
         let json = JSON.parse(JSON.stringify(response.data));
         let range = response.data.length;
-        let listArr = [];
         let newArr = [];
-        
+
         //구매내역 LIST 파싱 및 배열 할당
         for(let i=0;i<range;i++){
             newArr.push(JSON.stringify(json[i]));
@@ -55,41 +60,111 @@ export default function Dashboard(props){
         for(let i=0;i<range;i++){
             listArr.push(JSON.parse(newArr[i]));
         }
-        console.log(listArr[0]);
-        
-
         }).catch(function(err){
         console.log(err);
         })
-        
+
     // eslint-disable-next-line
-    },[])
+    },[listArr])
+    
+    console.log(listArr);
+    console.log(listArr[0]);
+    const columns = useMemo(() => [
+        {
+            accessor: "CUSTNM",
+            Header: "구매자",
+        },
+        {
+            accessor: "SALEDT",
+            Header: "구매 일자",
+        },
+        {
+            accessor: "SHOPCD",
+            Header: "구매 매장(코드)",
+        },
+        {
+            accessor: "SHOPNM",
+            Header: "구매 매장",
+        },
+        {
+            accessor: "STYLECD",
+            Header: "구매 상품",
+        },
+        {
+            accessor: "COLORCD",
+            Header: "컬러",
+        },
+        {
+            accessor: "SIZECD",
+            Header: "사이즈",
+        },
+        {
+            accessor: "BARCODE",
+            Header: "바코드",
+        },
+        {
+            accessor: "SALECONSAMT",
+            Header: "지불금액",
+        },
+        {
+            accessor: "USE_POINT",
+            Header: "사용포인트",
+        },
+    ],[]);
+    // eslint-disable-next-line
+    const data = useMemo(() => {
+        if (listArr.length > 0) { 
+          return [{
+            CUSTNM: listArr[0].CUSTNM,
+            SALEDT: listArr[0].SALEDT,
+            SHOPCD: listArr[0].SHOPCD,
+            SHOPNM: listArr[0].SHOPNM,
+            STYLECD: listArr[0].STYLECD,
+            COLORCD: listArr[0].COLORCD,
+            SIZECD: listArr[0].SIZECD,
+            BARCODE: listArr[0].BARCODE,
+            SALECONSAMT: listArr[0].SALECONSAMT,
+            USE_POINT: listArr[0].USE_POINT,
+            
+          }];
+        } else {
+          return [];
+        }
+      });
+    // const data = useMemo(() => listArr,[]);
 
-    // 구매내역 LIST API CALL
-    // axios.post('/api/apitool',{
-    //     type: 'list',
-    //     custnm: c_nm,
-    //     custid: c_id
-    //     }).then(function(response) {
-    //     //response 한 데이터 셋업
-    //     let json = JSON.parse(JSON.stringify(response.data));
-    //     let range = response.data.length;
-    //     let listArr = [];
-    //     let newArr = [];
-        
-    //     //구매내역 LIST 파싱 및 배열 할당
-    //     for(let i=0;i<range;i++){
-    //         newArr.push(JSON.stringify(json[i]));
-    //     }
-    //     for(let i=0;i<range;i++){
-    //         listArr.push(JSON.parse(newArr[i]));
-    //     }
-    //     console.log(listArr[0]);
-        
+    const Table = ({ columns, data }) => {
+        const tableInstance = useTable({ columns, data });
+        const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+          tableInstance;
+      
+        return (
+          <table {...getTableProps()}>
+            <thead>
+              {headerGroups.map((headerGroup) => (
+                <tr {...headerGroup.getHeaderGroupProps()}>
+                  {headerGroup.headers.map((column) => (
+                    <th {...column.getHeaderProps()}>{column.render("Header")}</th>
+                  ))}
+                </tr>
+              ))}
+            </thead>
+            <tbody {...getTableBodyProps()}>
+              {rows.map((row) => {
+                prepareRow(row);
+                return (
+                  <tr {...row.getRowProps()}>
+                    {row.cells.map((cell) => (
+                      <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                    ))}
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        );
+      };
 
-    //     }).catch(function(err){
-    //     console.log(err);
-    //     })
 //Render
     return(
         <Container fixed maxWidth='xl' 
@@ -102,7 +177,7 @@ export default function Dashboard(props){
         <div className='dash'>
             <div className='idcard_left'>
                 <Typography paragraph variant='h4'
-                fontFamily='Cafe24Simplehae'
+                fontFamily='NotoSansKR-Bold'
                 sx={{
                     color: 'white',
                     maxWidth: '600px'
@@ -118,16 +193,17 @@ export default function Dashboard(props){
                 }}
                 >
                 <CardContent>
-                    <Typography textAlign={'right'}
+                    <Typography textAlign={'right'} fontFamily='NotoSansKR-thin'
                         sx={{ 
                         fontSize: 14,
                         }} color="white" gutterBottom>
                         직원명
                     </Typography>
-                    <Typography textAlign={'right'} color="white" variant="h5" component="div">
+                    <Typography textAlign={'right'} color="white" variant="h5"
+                     component="div" fontFamily='NotoSansKR-Midium'>
                         {c_nm}
                     </Typography>
-                    <Typography textAlign={'right'} color="white" sx={{ mb: 1.5 }}>
+                    <Typography textAlign={'right'} color="white" fontFamily='NotoSansKR-light' sx={{ mb: 1.5 }}>
                         {c_email}
                     </Typography>
                 </CardContent>
@@ -142,7 +218,8 @@ export default function Dashboard(props){
                 background: 'linear-gradient(rgba(10,50,100,0.8),transparent)',
                 backgroundColor: 'white'
             }}>
-                <Typography paragraph variant='h5' textAlign={'center'}sx={{
+                <Typography paragraph variant='h5' textAlign={'center'} fontFamily='NotoSansKR-Bold'
+                sx={{
                     color: 'white',
                     textShadow: '1px 1px 3px #5D5D5D'
                 }}>
@@ -153,7 +230,7 @@ export default function Dashboard(props){
                     color: 'black',
                     textShadow: '1px 1px 1px WHITE'
                 }}
-                paragraph variant='h6' textAlign={'center'} fontFamily='RecipekoreaFONT' >{c_alloc_point} 원</Typography>
+                paragraph variant='h5' textAlign={'center'} fontFamily='NotoSansKR-Black' >{c_alloc_point} 원</Typography>
             </Item>
             </Grid>
             <Grid item xs={4}>
@@ -161,7 +238,8 @@ export default function Dashboard(props){
                 background: 'linear-gradient(rgba(10,50,100,0.8),transparent)',
                 backgroundColor: 'white'
             }}>
-                <Typography paragraph variant='h5' textAlign={'center'}sx={{
+                <Typography paragraph variant='h5' textAlign={'center'} fontFamily='NotoSansKR-Bold'
+                sx={{
                     color: 'white',
                     textShadow: '1px 1px 3px #5D5D5D'
                 }}>
@@ -172,7 +250,7 @@ export default function Dashboard(props){
                         color: 'BLACK',
                         textShadow: '1px 1px 1px WHITE'
                     }}
-                paragraph variant='h6' textAlign={'center'} fontFamily='RecipekoreaFONT' >{c_use_point} 원</Typography>
+                paragraph variant='h5' textAlign={'center'} fontFamily='NotoSansKR-Black' >{c_use_point} 원</Typography>
             </Item>
             </Grid>
             <Grid item xs={4}>
@@ -180,7 +258,8 @@ export default function Dashboard(props){
                 background: 'linear-gradient(rgba(10,50,100,0.8),transparent)',
                 backgroundColor: 'white'
             }}>
-                <Typography paragraph variant='h5' textAlign={'center'}sx={{
+                <Typography paragraph variant='h5' textAlign={'center'} fontFamily='NotoSansKR-Bold'
+                sx={{
                     color: 'white',
                     textShadow: '1px 1px 3px #5D5D5D'
                 }}>
@@ -191,7 +270,7 @@ export default function Dashboard(props){
                         color: '#50AF49',
                         textShadow: '1px 1px 1px WHITE'
                     }}
-                paragraph variant='h6' textAlign={'center'} fontFamily='RecipekoreaFONT' >{c_remain_point} 원</Typography>
+                paragraph variant='h5' textAlign={'center'} fontFamily='NotoSansKR-Black' >{c_remain_point} 원</Typography>
             </Item>
             </Grid>
             <Grid item xs={12}>
@@ -203,7 +282,7 @@ export default function Dashboard(props){
             </Grid>
             <Grid item xs={12}>
             <Item elevation={3}>
-                최근 구매 내역(5건 정도, 더보기 추가-클릭 시 사용 내역 Component 렌더)
+                <Table columns={columns} data={data} />
             </Item>
             </Grid>
         </Grid>

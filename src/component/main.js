@@ -187,11 +187,11 @@ export default function Main(){
                 <MenuIcon />
             </IconButton>
             {/* 상단 메뉴바 좌측 UI */}
-            <Typography variant="h5" noWrap component="div" flexGrow={1} fontFamily='Cafe24Simplehae'>
+            <Typography variant="h5" noWrap component="div" flexGrow={1} fontFamily='NotoSansKR-Bold'>
                 B.CAVE EMPLOYEE DISCOUNT POINT 
             </Typography>
             {/* 상단 메뉴바 우측 UI */}
-            <Typography fontFamily='Cafe24Simplehae'>
+            <Typography fontFamily='NotoSansKR-Bold'>
                     아이콘+기능 추가(홈페이지가기, 그룹웨어 가기, etc)
                 </Typography>    
             <IconButton
@@ -199,7 +199,7 @@ export default function Main(){
                 edge="end"
                 onClick={LogoutHandleOnClick}
             >
-                <Typography fontFamily='RecipekoreaFONT'>
+                <Typography fontFamily='NotoSansKR-Bold'>
                     LOGOUT
                 </Typography>
             </IconButton>
