@@ -3,10 +3,15 @@ import * as React from 'react';
 import './home.css';
 import { useEffect } from 'react';
 import axios from 'axios';
+import icon_reciept from './icon/icon_reciept.png';
 
 //이력 테이블에 필요한 라이브러리 import
 import { useTable } from "react-table";
 import { useMemo } from 'react';
+import { useState } from 'react';
+
+//ApexCharts 차트 라이브러리 import
+import ApexCharts from 'apexcharts';
 
 //MUI
 import Typography from '@mui/material/Typography';
@@ -27,8 +32,8 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function Dashboard(props){
 //정의
-
-    let listArr = [];
+    const [listArr, setListArr] = useState([]);
+    // let listArr = [];
     
     let {
         c_id,
@@ -41,34 +46,41 @@ export default function Dashboard(props){
     c_alloc_point = c_alloc_point.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     c_use_point = c_use_point.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     c_remain_point = c_remain_point.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
-    useEffect(()=>{
-        axios.post('/api/apitool',{
-        type: 'list',
-        custnm: c_nm,
-        custid: c_id
-        }).then(function(response) {
-        //response 한 데이터 셋업
-        let json = JSON.parse(JSON.stringify(response.data));
-        let range = response.data.length;
-        let newArr = [];
-
-        //구매내역 LIST 파싱 및 배열 할당
-        for(let i=0;i<range;i++){
-            newArr.push(JSON.stringify(json[i]));
-        }
-        for(let i=0;i<range;i++){
-            listArr.push(JSON.parse(newArr[i]));
-        }
-        }).catch(function(err){
-        console.log(err);
-        })
-
-    // eslint-disable-next-line
-    },[listArr])
     
-    console.log(listArr);
-    console.log(listArr[0]);
+    //구매내역 LIST API 콜
+    useEffect(()=>{
+        async function fetchList() {
+          try {
+            const response = await axios.post('/api/apitool', {
+              type: 'list',
+              custnm: c_nm,
+              custid: c_id
+            });
+            let json = JSON.parse(JSON.stringify(response.data));
+            let range = response.data.length;
+            let newArr = [];
+            // 구매내역 LIST 파싱 및 배열 할당
+            for(let i=0;i<range;i++){
+              newArr.push(JSON.stringify(json[i]));
+            }
+            let updatedListArr = [];
+            for(let i=0;i<range;i++){
+              updatedListArr.push(JSON.parse(newArr[i]));
+            }
+            setListArr(updatedListArr);
+
+          } catch (err) {
+            console.log(err);
+          }
+        }
+        fetchList();
+
+        // eslint-disable-next-line
+      },[]);
+    //구매내역 LIST API 콜
+
+    // 사용 내역 Table Header 정의
+    // eslint-disable-next-line
     const columns = useMemo(() => [
         {
             accessor: "CUSTNM",
@@ -79,12 +91,12 @@ export default function Dashboard(props){
             Header: "구매 일자",
         },
         {
-            accessor: "SHOPCD",
-            Header: "구매 매장(코드)",
-        },
-        {
             accessor: "SHOPNM",
             Header: "구매 매장",
+        },
+        {
+            accessor: "SHOPCD",
+            Header: "매장 코드",
         },
         {
             accessor: "STYLECD",
@@ -110,28 +122,28 @@ export default function Dashboard(props){
             accessor: "USE_POINT",
             Header: "사용포인트",
         },
-    ],[]);
+    ]);
+
+    // 사용 내역 Table Data 정의
     // eslint-disable-next-line
     const data = useMemo(() => {
-        if (listArr.length > 0) { 
-          return [{
-            CUSTNM: listArr[0].CUSTNM,
-            SALEDT: listArr[0].SALEDT,
-            SHOPCD: listArr[0].SHOPCD,
-            SHOPNM: listArr[0].SHOPNM,
-            STYLECD: listArr[0].STYLECD,
-            COLORCD: listArr[0].COLORCD,
-            SIZECD: listArr[0].SIZECD,
-            BARCODE: listArr[0].BARCODE,
-            SALECONSAMT: listArr[0].SALECONSAMT,
-            USE_POINT: listArr[0].USE_POINT,
-            
-          }];
-        } else {
-          return [];
-        }
-      });
-    // const data = useMemo(() => listArr,[]);
+        const slicedArr = listArr.slice(0,10);
+        // SALEDT를 기준으로 내림차순 정렬
+        const sortedArr = slicedArr.sort((a, b) => (a.SALEDT > b.SALEDT) ? -1 : 1); 
+
+        return sortedArr.map(item => ({
+          CUSTNM: item.CUSTNM,
+          SALEDT: item.SALEDT,
+          SHOPCD: item.SHOPCD,
+          SHOPNM: item.SHOPNM,
+          STYLECD: item.STYLECD,
+          COLORCD: item.COLORCD,
+          SIZECD: item.SIZECD,
+          BARCODE: item.BARCODE,
+          SALECONSAMT: item.SALECONSAMT,
+          USE_POINT: item.USE_POINT,
+        }));
+      }, [listArr]);
 
     const Table = ({ columns, data }) => {
         const tableInstance = useTable({ columns, data });
@@ -139,12 +151,12 @@ export default function Dashboard(props){
           tableInstance;
       
         return (
-          <table {...getTableProps()}>
+          <table {...getTableProps()} width='100%'>
             <thead>
               {headerGroups.map((headerGroup) => (
                 <tr {...headerGroup.getHeaderGroupProps()}>
                   {headerGroup.headers.map((column) => (
-                    <th {...column.getHeaderProps()}>{column.render("Header")}</th>
+                    <th {...column.getHeaderProps()} style={{ borderBottom: '1px solid black' }}>{column.render("Header")}</th>
                   ))}
                 </tr>
               ))}
@@ -153,7 +165,7 @@ export default function Dashboard(props){
               {rows.map((row) => {
                 prepareRow(row);
                 return (
-                  <tr {...row.getRowProps()}>
+                  <tr {...row.getRowProps()} border-bottom='10px'>
                     {row.cells.map((cell) => (
                       <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
                     ))}
@@ -164,6 +176,9 @@ export default function Dashboard(props){
           </table>
         );
       };
+
+      //NIVO CHART
+      
 
 //Render
     return(
@@ -176,12 +191,15 @@ export default function Dashboard(props){
         >
         <div className='dash'>
             <div className='idcard_left'>
+                <img src={icon_reciept} art="영수"
+                    width="50px" height="60px" /> 
                 <Typography paragraph variant='h4'
-                fontFamily='NotoSansKR-Bold'
+                fontFamily='NotoSansKR-Bold' textAlign={"center"}
                 sx={{
                     color: 'white',
                     maxWidth: '600px'
                 }}>
+                    
                     직원 할인 포인트 내역
                 </Typography>
             </div>
@@ -210,8 +228,6 @@ export default function Dashboard(props){
             </Card>
             </div>
         </div>
-        
-       
         <Grid container spacing={2}>
             <Grid item xs={4}>
             <Item elevation={3} sx={{
@@ -276,11 +292,21 @@ export default function Dashboard(props){
             <Grid item xs={12}>
             <Item elevation={3}>
                 월별 사용량 차트 그래프
-                (꺽은선 그래프)
-                NIVO 활용
+                (LINE CHART)
+                NIVO or ApexCharts 활용
             </Item>
             </Grid>
             <Grid item xs={12}>
+            <div className='table_Header'>
+                <Typography paragraph variant='h5'
+                fontFamily='NotoSansKR-Bold'
+                sx={{
+                    color: 'white',
+                    maxWidth: '600px'
+                }}>
+                    포인트 사용 내역 (최근 10 건)
+                </Typography>
+            </div>
             <Item elevation={3}>
                 <Table columns={columns} data={data} />
             </Item>

@@ -12,6 +12,7 @@ import { useState } from 'react';
 // import { useState, useEffect } from 'react';
 
 import i1 from './img/i1.png';
+import logout_icon from './icon/icon_logout.png';
 
 //MUI
 import { styled, useTheme } from '@mui/material/styles';
@@ -104,13 +105,17 @@ export default function Main(){
     const c_remain_point = location.state.c_remain_point;
 
 //선언
+    // 날짜 선언
+    const date = new Date();
+    //네비게이트 선언
     const navigate = useNavigate();
 
+    //사이드바 선언
     const [content, setContent] = useState('first');
     const sideButton = [
         {
             id: 1,
-            text: 'HOME',
+            text: '대시보드',
             name: 'first'
         },
         {
@@ -118,11 +123,11 @@ export default function Main(){
             text: '복지 포인트란?',
             name: 'second'
         },
-        {
-            id: 3,
-            text: '포인트 사용내역',
-            name: 'third'
-        }
+        // {
+        //     id: 3,
+        //     text: '포인트 사용내역',
+        //     name: 'third'
+        // }
     ];
 
 //사이드 메뉴 이동 핸들러
@@ -163,8 +168,6 @@ export default function Main(){
     const handleDrawerClose = () => {
         setOpen(false);
     };
-
-
         
 //render
     return(
@@ -191,16 +194,28 @@ export default function Main(){
                 B.CAVE EMPLOYEE DISCOUNT POINT 
             </Typography>
             {/* 상단 메뉴바 우측 UI */}
-            <Typography fontFamily='NotoSansKR-Bold'>
-                    아이콘+기능 추가(홈페이지가기, 그룹웨어 가기, etc)
-                </Typography>    
+            <Typography fontFamily='NotoSansKR-Bold' 
+            variant="h6" 
+            textAlign={"center"}
+            paddingRight={"50px"}
+            >
+                {
+                    "DATE : " 
+                    + date.getFullYear().toString()
+                    + " 년  " 
+                    + (date.getMonth()+1).toString()
+                    + " 월  " 
+                    + date.getDate().toString()
+                    + " 일  " 
+                }
+            </Typography>
             <IconButton
                 color="inherit"
                 edge="end"
                 onClick={LogoutHandleOnClick}
             >
                 <Typography fontFamily='NotoSansKR-Bold'>
-                    LOGOUT
+                    <img src={logout_icon} alt="로그아웃" width="35px" height="35px" />
                 </Typography>
             </IconButton>
             </Toolbar>
