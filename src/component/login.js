@@ -26,13 +26,15 @@ import axios from 'axios';
   // Footer 카피라이트
 function Copyright(props) {
   return (
-    <Typography variant="body2" color="white" align="center"{...props}>
+    <Typography variant="body2" color="white" align="center"{...props} whiteSpace="pre-wrap">
       {'Copyright © '}
       <Link color="inherit" href="http://www.barrels.co.kr/" target='__blank'>
         B.Cave & Co.
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
+      {'\n'}
+      시스템 담당자 : 운영사업본부 IT팀 사원 최중백
     </Typography>
   );
 }
@@ -177,7 +179,7 @@ export default function SignIn() {
                 required
                 fullWidth
                 id={FormData.name}
-                label="성명(CUSTNM)"
+                label="성명"
                 name="name"
                 autoComplete="name"
                 // autoFocus
@@ -195,7 +197,7 @@ export default function SignIn() {
                 required
                 fullWidth
                 name="pwd"
-                label="비밀번호(CUSTPW)"
+                label="비밀번호"
                 type="password"
                 id="pwd"
                 autoComplete="current-password"
