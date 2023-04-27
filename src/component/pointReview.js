@@ -12,10 +12,10 @@ export default function PointReview(){
     return(
         <Box>
             <Typography paragraph variant='h3'>
-                복지포인트 설명 제목
+                직원 할인 포인트 설명
             </Typography>
             <Typography paragraph variant='body1'>
-                복지포인트 설명
+                이미지화 및 첨부
             </Typography>
         </Box>
 

@@ -135,6 +135,17 @@ export default function SignIn() {
           {/* 메인 배너 이미지 등록 */}
           <div className="banner" align="center">
               <img src={i1} alt="banner"/>
+              <Typography
+              paragraph variant='h4'
+              fontFamily='NotoSansKR-Bold' textAlign={"center"}
+              sx={{
+                  color: 'black',
+                  maxWidth: '600px'
+              }}
+              >
+                B.CAVE EMPLOYEE DISCOUNT POINT
+              </Typography>
+              
           </div>
           <Box
             sx={{

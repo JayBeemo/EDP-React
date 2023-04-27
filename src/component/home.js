@@ -11,7 +11,7 @@ import { useMemo } from 'react';
 import { useState } from 'react';
 
 //ApexCharts 차트 라이브러리 import
-import ApexCharts from 'apexcharts';
+// import ApexCharts from 'apexcharts';
 
 //MUI
 import Typography from '@mui/material/Typography';
@@ -177,9 +177,6 @@ export default function Dashboard(props){
         );
       };
 
-      //NIVO CHART
-      
-
 //Render
     return(
         <Container fixed maxWidth='xl' 
@@ -191,7 +188,7 @@ export default function Dashboard(props){
         >
         <div className='dash'>
             <div className='idcard_left'>
-                <img src={icon_reciept} art="영수"
+                <img src={icon_reciept} alt="영수"
                     width="50px" height="60px" /> 
                 <Typography paragraph variant='h4'
                 fontFamily='NotoSansKR-Bold' textAlign={"center"}
@@ -239,7 +236,7 @@ export default function Dashboard(props){
                     color: 'white',
                     textShadow: '1px 1px 3px #5D5D5D'
                 }}>
-                    분기 적립 포인트
+                    적립 포인트
                 </Typography>
                 <Typography 
                 sx={{
@@ -290,11 +287,11 @@ export default function Dashboard(props){
             </Item>
             </Grid>
             <Grid item xs={12}>
-            <Item elevation={3}>
+            {/* <Item elevation={3}>
                 월별 사용량 차트 그래프
                 (LINE CHART)
                 NIVO or ApexCharts 활용
-            </Item>
+            </Item> */}
             </Grid>
             <Grid item xs={12}>
             <div className='table_Header'>

@@ -118,11 +118,11 @@ export default function Main(){
             text: '대시보드',
             name: 'first'
         },
-        {
-            id: 2,
-            text: '복지 포인트란?',
-            name: 'second'
-        },
+        // {
+        //     id: 2,
+        //     text: '포인트 설명',
+        //     name: 'second'
+        // },
         // {
         //     id: 3,
         //     text: '포인트 사용내역',
