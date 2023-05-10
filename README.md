@@ -1,9 +1,29 @@
-# 비케이브 전사 복지포인트 조회 사이트 개발 진행
+# EDP ( Employee Discount Point )
+ReactJS 를 통한 직원 할인 포인트 조회 웹
 
-기간 : 2023-02-15 ~ 2023-05-02
-로컬 개발 완료 : 2023-04-30
-배포 진행 : 2023-05-02
 
-REACT SERVER : EDP
-API SERVER : EDP-NODE
+## 🖥️ 프로젝트 소개
+자사 임직원분들의 할인 포인트를 직접 접속하여 조회할 수 있는 웹 프로그램 입니다.
+<br>
 
+## 🕰️ 개발 기간
+* 23.02.13일 - 22.05.02일
+
+### 🧑‍🤝‍🧑 맴버구성
+ - 최중백 : 전체 프로젝트 진행 ( 웹 개발 / NODE 서버 구축 / UI,CSS 작업 )
+### ⚙️ 개발 환경
+- `Java 8`
+- `JDK 1.8.0`
+- **IDE** : STS 3.9
+- **Framework** : Node.js v18.X / express.JS v4.18.2 / React.JS v18.2.X
+- **Database** : Oracle DB(11xe)
+- **ORM** : Mybatis
+
+## 📌 주요 기능
+#### 로그인 - <a href="https://github.com/chaehyuenwoo/SpringBoot-Project-MEGABOX/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(Login)" >상세보기 - WIKI 이동</a>
+- 회원정보 API 연동 및 DB값 검증
+- 회원 정보는 자사 ERP 프로그램의 정보(View) 데이터 참조
+- 로그인 시 및 세션(Session) 생성
+#### 대시보드 - <a href="https://github.com/chaehyuenwoo/SpringBoot-Project-MEGABOX/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(Member)" >상세보기 - WIKI 이동</a>
+- API 연동을 통한 직원 할인 포인트 조회
+- 주문 정보는 자사 ERP 프로그램의 정보(View) 데이터 참조
