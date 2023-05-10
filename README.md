@@ -12,10 +12,9 @@ ReactJS 를 통한 직원 할인 포인트 조회 웹
 ### 🧑‍🤝‍🧑 맴버구성
  - 최중백 : 전체 프로젝트 진행 ( 웹 개발 / NODE 서버 구축 / UI,CSS 작업 )
 ### ⚙️ 개발 환경
-- `Java 8`
-- `JDK 1.8.0`
-- **IDE** : STS 3.9
-- **Framework** : Node.js v18.X / express.JS v4.18.2 / React.JS v18.2.X
+- `Node.js v18`
+- **IDE** : Visual Studio Code v1.74.2
+- **Framework** :  / express.JS v4.18.2 / React.JS v18.2.X
 - **Database** : Oracle DB(11xe)
 - **ORM** : Mybatis
 
