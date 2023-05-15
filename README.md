@@ -1,77 +1,29 @@
-# 비케이브 전사 복지포인트 조회 사이트 개발 진행
+# EDP ( Employee Discount Point )
+ReactJS 를 통한 직원 할인 포인트 조회 웹
 
-기간 : 2023-02-15 ~ 현재 진행중
 
-REACT SERVER : EDP
-API SERVER : EDP-NODE
+## 🖥️ 프로젝트 소개
+자사 임직원분들의 할인 포인트를 직접 접속하여 조회할 수 있는 웹 프로그램 입니다.
+<br>
 
-# Getting Started with Create React App
+## 🕰️ 개발 기간
+* 23.02.13일 - 22.05.02일
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### 🧑‍🤝‍🧑 맴버구성
+ - 최중백 : 전체 프로젝트 진행 ( 웹 개발 / NODE 서버 구축 / UI,CSS 작업 )
+### ⚙️ 개발 환경
+- `Node.js v18`
+- **IDE** : Visual Studio Code v1.74.2
+- **Framework** :  / express.JS v4.18.2 / React.JS v18.2.X
+- **Database** : Oracle DB(11xe)
+- **ORM** : Mybatis
 
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 📌 주요 기능
+#### 로그인 - 
+<!-- <a href="https://github.com/chaehyuenwoo/SpringBoot-Project-MEGABOX/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(Login)" >상세보기 - WIKI 이동</a> -->
+- 회원정보 API 연동 및 DB값 검증
+- 회원 정보는 자사 ERP 프로그램의 정보(View) 데이터 참조
+- 로그인 시 및 세션(Session) 생성
+#### 대시보드
+- API 연동을 통한 직원 할인 포인트 조회
+- 주문 정보는 자사 ERP 프로그램의 정보(View) 데이터 참조
