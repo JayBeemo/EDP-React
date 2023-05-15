@@ -68,12 +68,18 @@ export default function SignIn() {
       password: data.get('pwd'),
       setName: sessionStorage.getItem('name')
     });
+
+    const API_URL = process.env.REACT_APP_DB_HOST;
   
-    axios.post('/api/apitool',{
-        type: 'auth',
-        custnm: data.get('name'),
-        custpw: data.get('pwd')
-      }).then(function(response) {
+    axios.post(API_URL + '/api/apitool', {
+      type: 'auth',
+      custnm: data.get('name'),
+      custpw: data.get('pwd')
+    }, {
+      headers: {
+        'Origin': 'http://192.168.0.10:3000'
+      }
+    }).then(function(response) {
         //response 한 데이터 셋업
         let json = JSON.parse(JSON.stringify(response.data));
 
@@ -129,7 +135,7 @@ export default function SignIn() {
       <div className='main'>
         {/* 메인페이지 동영상 */}
         <video muted autoPlay loop playsInline>
-          <source src='/vid/bg-video.mp4' type="video/mp4" />
+          <source src='/vid/bg-video.mp4' type="video/webm" />
         </video>
         <div className='content'>
           <Container component="main" maxWidth="xs" className="img-animate-1">

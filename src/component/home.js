@@ -49,12 +49,18 @@ export default function Dashboard(props){
     
     //구매내역 LIST API 콜
     useEffect(()=>{
+        const API_URL = process.env.REACT_APP_DB_HOST;
         async function fetchList() {
           try {
-            const response = await axios.post('/api/apitool', {
-              type: 'list',
-              custnm: c_nm,
-              custid: c_id
+            const response = await axios.post(API_URL + '/api/apitool', {
+                // withCredentials: true,  
+                type: 'list',
+                custnm: c_nm,
+                custid: c_id
+            },{
+                headers:{
+                    'Origin': 'http://192.168.0.10:3000'
+                }
             });
             let json = JSON.parse(JSON.stringify(response.data));
             let range = response.data.length;

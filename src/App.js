@@ -15,16 +15,15 @@ function App() {
     // 웹사이트 라우팅
     // 로그인 페이지 : login.js
     // 기본 페이지 : main.js 내 home.js 컴포넌트
-    // 프록시 페이지 : reactProxy.js
     <div>
-      <Routes>
-        <Route exact path="/" element={<Login />}/>
-        <Route exact path="/login" element={<Login />}/>
-        <Route exact path="/main" element={<Main />}/>
-        <Route exact path="/home" element={<Home />}/>
-        <Route exact path="/pointreview" element={<PointReview />}/>
-        <Route exact path="/history" element={<History />}/>
-      </Routes>
+        <Routes>
+            <Route path="/" element={<Login />}/>
+            <Route path="/login" element={<Login />}/>
+            <Route path="/main" element={<Main />}/>
+            <Route path="/home" element={<Home />}/>
+            <Route path="/pointreview" element={<PointReview />}/>
+            <Route path="/history" element={<History />}/>
+          </Routes>
     </div>
   );
 }
