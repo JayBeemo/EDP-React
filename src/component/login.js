@@ -135,8 +135,9 @@ export default function SignIn() {
       <div className='main'>
         {/* 메인페이지 동영상 */}
         <video muted autoPlay loop playsInline>
-          <source src='/vid/bg-video.mp4' type="video/webm" />
+          <source src='/vid/bg-video.webm' type="video/webm" />
         </video>
+        
         <div className='content'>
           <Container component="main" maxWidth="xs" className="img-animate-1">
           <CssBaseline/>

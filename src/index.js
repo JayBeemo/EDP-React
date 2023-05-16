@@ -5,6 +5,14 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 
+// IE11의 경우
+import 'react-app-polyfill/ie11';
+import 'react-app-polyfill/stable';
+
+// 추가할 부분
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <BrowserRouter basename="/">
