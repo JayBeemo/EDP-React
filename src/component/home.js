@@ -89,20 +89,16 @@ export default function Dashboard(props){
     // eslint-disable-next-line
     const columns = useMemo(() => [
         {
-            accessor: "CUSTNM",
-            Header: "구매자",
-        },
-        {
             accessor: "SALEDT",
             Header: "구매 일자",
         },
         {
-            accessor: "SHOPNM",
-            Header: "구매 매장",
-        },
-        {
             accessor: "SHOPCD",
             Header: "매장 코드",
+        },
+        {
+            accessor: "SHOPNM",
+            Header: "구매 매장",
         },
         {
             accessor: "STYLECD",
@@ -138,7 +134,6 @@ export default function Dashboard(props){
         const sortedArr = slicedArr.sort((a, b) => (a.SALEDT > b.SALEDT) ? -1 : 1); 
 
         return sortedArr.map(item => ({
-          CUSTNM: item.CUSTNM,
           SALEDT: item.SALEDT,
           SHOPCD: item.SHOPCD,
           SHOPNM: item.SHOPNM,
