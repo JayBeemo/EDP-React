@@ -33,7 +33,6 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function Dashboard(props){
 //정의
     const [listArr, setListArr] = useState([]);
-    // let listArr = [];
     
     let {
         c_id,
@@ -53,7 +52,6 @@ export default function Dashboard(props){
         async function fetchList() {
           try {
             const response = await axios.post(API_URL + '/api/apitool', {
-                // withCredentials: true,  
                 type: 'list',
                 custnm: c_nm,
                 custid: c_id

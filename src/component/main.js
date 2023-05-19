@@ -123,11 +123,11 @@ export default function Main(){
         //     text: '포인트 설명',
         //     name: 'second'
         // },
-        // {
-        //     id: 3,
-        //     text: '포인트 사용내역',
-        //     name: 'third'
-        // }
+        {
+            id: 3,
+            text: '포인트 사용내역',
+            name: 'third'
+        }
     ];
 
 //사이드 메뉴 이동 핸들러
@@ -145,8 +145,12 @@ export default function Main(){
         c_use_point={c_use_point} 
         c_remain_point={c_remain_point}
         />,
-        second: <PointReview />,
-        third: <History />
+        second: <PointReview/>,
+        third: <History
+        c_id={c_id}
+        c_nm={c_nm}
+        c_email={c_email}
+        />
     }
 
 
