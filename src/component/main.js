@@ -288,7 +288,8 @@ export default function Main(){
             height: '100%',
           }}
         >
-            {content && <Box>{selectComponent[content]}</Box>}
+            {content && <Box>{selectComponent[content]}
+        </Box>}
         </Box>
         </MainDrawer>
         </Box>

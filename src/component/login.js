@@ -34,7 +34,9 @@ function Copyright(props) {
       {new Date().getFullYear()}
       {'.'}
       {'\n'}
-      시스템 담당자 : 운영사업본부 IT팀 사원 최중백
+      {'\n'}
+      시스템 담당자 : 운영사업본부 IT팀 사원 최중백{'\n'}
+      포인트 관련 문의 : 운영사업본부 인사팀
     </Typography>
   );
 }
