@@ -105,8 +105,8 @@ export default function PointReview(props) {
                 Header: '사이즈',
             },
             {
-                accessor: 'BARCODE',
-                Header: '바코드',
+                accessor: 'STYLENM',
+                Header: '상품명',
             },
             {
                 accessor: 'SALECONSAMT',
@@ -149,7 +149,7 @@ export default function PointReview(props) {
                 STYLECD: item.STYLECD,
                 COLORCD: item.COLORCD,
                 SIZECD: item.SIZECD,
-                BARCODE: item.BARCODE,
+                STYLENM: item.STYLENM,
                 SALECONSAMT: item.SALECONSAMT,
                 USE_POINT: item.USE_POINT,
             }));
@@ -163,7 +163,7 @@ export default function PointReview(props) {
             STYLECD: item.STYLECD,
             COLORCD: item.COLORCD,
             SIZECD: item.SIZECD,
-            BARCODE: item.BARCODE,
+            STYLENM: item.STYLENM,
             SALECONSAMT: item.SALECONSAMT,
             USE_POINT: item.USE_POINT,
         }));

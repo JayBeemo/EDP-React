@@ -45,6 +45,31 @@ export default function Dashboard(props){
     c_alloc_point = c_alloc_point.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     c_use_point = c_use_point.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     c_remain_point = c_remain_point.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+    // 날짜 선언
+    
+
+    const bungi = () => {
+        const date = new Date();
+        let month;
+        if (date.getMonth() < 4 && date.getMonth() > 0) {
+            month = "1분기";
+        } else
+            if (date.getMonth() < 7 && date.getMonth() > 3) {
+                month = "2분기";
+            }
+            else
+                if (date.getMonth() < 10 && date.getMonth() > 6) {
+                    month = "3분기";
+                }
+                else
+                    if (date.getMonth() < 13 && date.getMonth() > 9) {
+                        month = "4분기";
+                    }
+                    return month;
+    }
+
+    
     
     //구매내역 LIST API 콜
     useEffect(()=>{
@@ -111,8 +136,8 @@ export default function Dashboard(props){
             Header: "사이즈",
         },
         {
-            accessor: "BARCODE",
-            Header: "바코드",
+            accessor: "STYLENM",
+            Header: "상품명",
         },
         {
             accessor: "SALECONSAMT",
@@ -138,7 +163,7 @@ export default function Dashboard(props){
           STYLECD: item.STYLECD,
           COLORCD: item.COLORCD,
           SIZECD: item.SIZECD,
-          BARCODE: item.BARCODE,
+          STYLENM: item.STYLENM,
           SALECONSAMT: item.SALECONSAMT,
           USE_POINT: item.USE_POINT,
         }));
@@ -235,7 +260,7 @@ export default function Dashboard(props){
                     color: 'white',
                     textShadow: '1px 1px 3px #5D5D5D'
                 }}>
-                    적립 포인트
+                    {bungi()} 적립 포인트
                 </Typography>
                 <Typography 
                 sx={{
@@ -255,7 +280,7 @@ export default function Dashboard(props){
                     color: 'white',
                     textShadow: '1px 1px 3px #5D5D5D'
                 }}>
-                    사용 포인트
+                   {bungi()} 사용 포인트
                 </Typography>
                 <Typography 
                     sx={{
@@ -275,7 +300,7 @@ export default function Dashboard(props){
                     color: 'white',
                     textShadow: '1px 1px 3px #5D5D5D'
                 }}>
-                    잔여 포인트
+                   {bungi()} 잔여 포인트
                 </Typography>
                 <Typography 
                     sx={{
