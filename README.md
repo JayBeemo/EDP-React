@@ -10,11 +10,12 @@ ReactJS 를 통한 직원 할인 포인트 조회 웹
 * 23.03.13일 - 22.05.02일
 
 ### 🧑‍🤝‍🧑 맴버구성
- - 최중백 : 전체 프로젝트 진행 ( 웹 개발 / NODE 서버 구축 / UI,CSS 작업 )
+ - 최중백 : 전체 프로젝트 진행 ( 웹 개발 / NODE API 서버 구축 / UI,CSS 작업 )
 
 ### ⚙️ 개발 환경
 - **IDE** : Visual Studio Code v1.74.2
 - **Framework** : Node.js v18 / express.JS v4.18.2 / React.JS v18.2.X
+- **UI Library** : Material UI
 - **Database** : Oracle DB(11xe)
 - **ORM** : Mybatis
 
