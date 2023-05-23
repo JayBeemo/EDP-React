@@ -4,6 +4,7 @@ import './home.css';
 import { useEffect } from 'react';
 import axios from 'axios';
 import icon_reciept from './icon/icon_reciept.png';
+import Loading from './loading';
 
 //이력 테이블에 필요한 라이브러리 import
 import { useTable } from "react-table";
@@ -33,6 +34,9 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function Dashboard(props){
 //정의
     const [listArr, setListArr] = useState([]);
+
+    // loading State
+    const [loading, setLoading] = useState(false);
     
     let {
         c_id,
@@ -76,6 +80,7 @@ export default function Dashboard(props){
         const API_URL = process.env.REACT_APP_DB_HOST;
         async function fetchList() {
           try {
+            setLoading(true);
             const response = await axios.post(API_URL + '/api/apitool', {
                 type: 'list',
                 custnm: c_nm,
@@ -97,7 +102,7 @@ export default function Dashboard(props){
               updatedListArr.push(JSON.parse(newArr[i]));
             }
             setListArr(updatedListArr);
-
+            setLoading(false);
           } catch (err) {
             console.log(err);
           }
@@ -210,6 +215,8 @@ export default function Dashboard(props){
             //     backgroundImage: `url(${bg1})`,
              }}
         >
+        {/* 조회 시 loading 스피너 작동 */}
+        {loading ?<Loading/> : null}
         <div className='dash'>
             <div className='idcard_left'>
                 <img src={icon_reciept} alt="영수"

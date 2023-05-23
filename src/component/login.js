@@ -4,7 +4,7 @@ import * as React from 'react';
 import i1 from './img/i1.png';
 import './login.css';
 import './main';
-
+import { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -18,6 +18,7 @@ import { lightBlue } from '@mui/material/colors';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import Loading from './loading';
 
 import axios from 'axios';
 
@@ -57,6 +58,8 @@ export default function SignIn() {
   //로그인 성공 시 main으로 이동하기 위한 navigation 정의
   const navigate = useNavigate();
 
+  const [loading, setLoading] = useState(false);
+
   //submit 이벤트 처리
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -72,7 +75,10 @@ export default function SignIn() {
     });
 
     const API_URL = process.env.REACT_APP_DB_HOST;
-  
+    
+    //Loading 로드
+    setLoading(true);
+    //API 호출
     axios.post(API_URL + '/api/apitool', {
       type: 'auth',
       custnm: data.get('name'),
@@ -84,7 +90,7 @@ export default function SignIn() {
     }).then(function(response) {
         //response 한 데이터 셋업
         let json = JSON.parse(JSON.stringify(response.data));
-
+        setLoading(false);
         //로그인 검증
         if (data.get('name') === '' || data.get('pwd') === '') {
           Swal.fire({
@@ -135,6 +141,8 @@ export default function SignIn() {
   return (
     <ThemeProvider theme={theme}>
       <div className='main'>
+      {/* 로그인 시 loading 스피너 작동 */}
+      {loading ?<Loading/> : null}
         {/* 메인페이지 동영상 */}
         <video muted autoPlay loop playsInline>
           <source src='/vid/bg-video.webm' type="video/webm" />
@@ -234,6 +242,8 @@ export default function SignIn() {
           <Copyright sx={{ mt: 8, mb: 4 }} />
         </Container>     
         </div>
+      </div>
+      <div>
       </div>
       
     </ThemeProvider>

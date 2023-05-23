@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useState, useEffect, useMemo } from 'react';
 import { useTable, usePagination } from 'react-table';
 import icon_table from './icon/icon_table.png';
+import Loading from './loading';
 
 //기간설정 조회를 위한 Date Picker 라이브러리 Import
 import 'react-dates/initialize';
@@ -37,12 +38,16 @@ export default function PointReview(props) {
     const [showFilteredData, setShowFilteredData] = useState(false);
     const [calendarFocused, setCalendarFocused] = useState(null);
 
+    // loading State
+    const [loading, setLoading] = useState(false);
+
     let { c_id, c_nm, c_email } = props;
 
     useEffect(() => {
         const API_URL = process.env.REACT_APP_DB_HOST;
         async function fetchlist() {
             try {
+                setLoading(true);
                 const response = await axios.post(
                     API_URL + '/api/apitool',
                     {
@@ -68,6 +73,7 @@ export default function PointReview(props) {
                     updatedListArr.push(JSON.parse(newArr[i]));
                 }
                 setListArr(updatedListArr);
+                setLoading(false);
             } catch (err) {
                 console.log(err);
             }
@@ -269,6 +275,8 @@ export default function PointReview(props) {
                     </Button>
                 </Box>
             <Box>
+                {/* 조회 시 loading 스피너 작동 */}
+                {loading ?<Loading/> : null}
                 <TableContainer component={Paper} style={{
                     marginTop: '16px'
                 }}>
