@@ -31,12 +31,12 @@ ReactJS 를 통한 직원 할인 포인트 조회 웹
 - API 연동을 통한 직원 할인 포인트 조회
 - 분기별 적립/사용/잔여 포인트 조회 및 최근 사용 내역(10건) 조회
 - 주문 정보는 자사 ERP 프로그램의 정보(View) 데이터 참조
-![2 (메인)대시보드](https://github.com/JayBeemo/EDP-React/assets/82929123/2b9b879a-3de3-4f51-857f-31d8a3bd20c7)
+![2 (메인)대시보드](https://github.com/JayBeemo/EDP-React/assets/82929123/0f620fd9-8fde-4abf-bc92-b5c0bc8b9662)
 #### 포인트 사용내역
 - API 연동을 통한 포인트 사용 내역 데이터 조회 컴포넌트
 - 전체 조회 및 기간별 조회 기능 구성
 - 테이블 페이징 구성
-![5 전체이력 추가 컴포넌트](https://github.com/JayBeemo/EDP-React/assets/82929123/e46c28ea-b05b-4bd2-91e5-418f2b366705)
+![5 전체이력 추가 컴포넌트](https://github.com/JayBeemo/EDP-React/assets/82929123/935bc28b-be2d-4c19-ad15-f4f1b454bee0)
 ___
 
 2023-05-16 최초 LOGIN 화면 비디오 최적화 진행 (mp4 -> Webm)
