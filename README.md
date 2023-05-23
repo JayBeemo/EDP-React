@@ -26,6 +26,7 @@ ReactJS 를 통한 직원 할인 포인트 조회 웹
 - 회원정보 API 연동 및 DB값 검증
 - 회원 정보는 자사 ERP 프로그램의 정보(View) 데이터 참조
 - 로그인 시 세션(Session) 생성
+![1 접속화면](https://github.com/JayBeemo/EDP-React/assets/82929123/a3bebe70-19e2-46bf-9435-eedc293e2c10)
 #### 대시보드
 - API 연동을 통한 직원 할인 포인트 조회
 - 분기별 적립/사용/잔여 포인트 조회 및 최근 사용 내역(10건) 조회
