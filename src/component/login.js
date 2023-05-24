@@ -19,6 +19,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import Loading from './loading';
+import DOMPurify from 'dompurify';
 
 import axios from 'axios';
 
@@ -61,80 +62,91 @@ export default function SignIn() {
   const [loading, setLoading] = useState(false);
 
   //submit 이벤트 처리
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    window.sessionStorage.removeItem('name')
-    window.sessionStorage.removeItem('pwd')
-    window.sessionStorage.setItem('name', data.get('name'))
-    window.sessionStorage.setItem('pwd', data.get('pwd'))
-    console.log({
-      name: data.get('name'),
-      password: data.get('pwd'),
-      setName: sessionStorage.getItem('name')
-    });
+const handleSubmit = (event) => {
+  event.preventDefault();
+  const data = new FormData(event.currentTarget);
+  const sanitizedName = DOMPurify.sanitize(data.get('name'));
+  const sanitizedPwd = DOMPurify.sanitize(data.get('pwd'));
+  window.sessionStorage.removeItem('name');
+  window.sessionStorage.removeItem('pwd');
+  window.sessionStorage.setItem('name', sanitizedName);
+  window.sessionStorage.setItem('pwd', sanitizedPwd);
+  console.log({
+    name: sanitizedName,
+    password: sanitizedPwd,
+    setName: sessionStorage.getItem('name'),
+  });
 
-    const API_URL = process.env.REACT_APP_DB_HOST;
-    
-    //Loading 로드
-    setLoading(true);
-    //API 호출
-    axios.post(API_URL + '/api/apitool', {
-      type: 'auth',
-      custnm: data.get('name'),
-      custpw: data.get('pwd')
-    }, {
-      headers: {
-        'Origin': 'http://192.168.0.10:3000'
+  const API_URL = process.env.REACT_APP_DB_HOST;
+
+  // Loading 로드
+  setLoading(true);
+  // API 호출
+  axios
+    .post(
+      API_URL + '/api/apitool',
+      {
+        type: 'auth',
+        custnm: sanitizedName,
+        custpw: sanitizedPwd,
+      },
+      {
+        headers: {
+          Origin: 'http://192.168.0.10:3000',
+        },
       }
-    }).then(function(response) {
-        //response 한 데이터 셋업
-        let json = JSON.parse(JSON.stringify(response.data));
-        setLoading(false);
-        //로그인 검증
-        if (data.get('name') === '' || data.get('pwd') === '') {
-          Swal.fire({
-            icon: 'warning',
-            title: '접속 에러',
-            html: `<p>계정 정보 입력 에러</p>`,
-            confirmButtonText: '확인',
-            confirmButtonColor: '#148CFF'
-          });
-          navigate('/login');
-        } else if (data.get('name') !== json[0].CUSTNM || data.get('pwd') !== json[0].CUSTPW ) {
-          Swal.fire({
-            icon: 'warning',
-            title: '접속 에러',
-            html: `<p>없는 계정입니다. 관리자에게 문의해주세요.</p>`,
-            confirmButtonText: '확인',
-            confirmButtonColor: '#148CFF'
-          });
-          navigate('/login');
-        } else {
-          navigate('/main', {
-            state:{
-              c_id: json[0].CUSTID,
-              c_nm: json[0].CUSTNM,
-              c_pw: json[0].CUSTPW,
-              c_email: json[0].EMAIL,
-              c_alloc_point: json[0].ALLOC_POINT,
-              c_use_point: json[0].USE_POINT,
-              c_remain_point: json[0].REMAIN_POINT
-            }
-          });
-        }
-      })
-      .catch(function(error) {
-        console.log(error);
+    )
+    .then(function (response) {
+      // response 한 데이터 셋업
+      let json = JSON.parse(JSON.stringify(response.data));
+      setLoading(false);
+      // 로그인 검증
+      if (sanitizedName === '' || sanitizedPwd === '') {
+        Swal.fire({
+          icon: 'warning',
+          title: '접속 에러',
+          html: `<p>계정 정보 입력 에러</p>`,
+          confirmButtonText: '확인',
+          confirmButtonColor: '#148CFF',
+        });
+        navigate('/login');
+      } else if (
+        sanitizedName !== json[0].CUSTNM ||
+        sanitizedPwd !== json[0].CUSTPW
+      ) {
         Swal.fire({
           icon: 'warning',
           title: '접속 에러',
           html: `<p>없는 계정입니다. 관리자에게 문의해주세요.</p>`,
           confirmButtonText: '확인',
-          confirmButtonColor: '#148CFF'
+          confirmButtonColor: '#148CFF',
         });
+        navigate('/login');
+      } else {
+        navigate('/main', {
+          state: {
+            c_id: json[0].CUSTID,
+            c_nm: json[0].CUSTNM,
+            c_pw: json[0].CUSTPW,
+            c_email: json[0].EMAIL,
+            c_alloc_point: json[0].ALLOC_POINT,
+            c_use_point: json[0].USE_POINT,
+            c_remain_point: json[0].REMAIN_POINT,
+          },
+        });
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+      Swal.fire({
+        icon: 'warning',
+        title: '접속 에러',
+        html: `<p>없는 계정입니다. 관리자에게 문의해주세요.</p>`,
+        confirmButtonText: '확인',
+        confirmButtonColor: '#148CFF',
       });
-  };
+    });
+};
   
 
   // RENDER

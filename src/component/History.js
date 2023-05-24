@@ -126,8 +126,8 @@ export default function PointReview(props) {
         []
     );
 
-    //기간 설정 조회를 위한 이벤트 핸들러
-
+    // 기간 설정 조회를 위한 이벤트 핸들러
+    // 버튼을 통해 전체조회/기간조회 결과값 Swithching
     const handleSearch = () => {
         if (showFilteredData) {
             setShowFilteredData(false);
