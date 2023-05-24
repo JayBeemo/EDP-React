@@ -54,8 +54,6 @@ const theme = createTheme({
 
   // React
 export default function SignIn() {
-  
-
   //로그인 성공 시 main으로 이동하기 위한 navigation 정의
   const navigate = useNavigate();
 
@@ -71,11 +69,12 @@ const handleSubmit = (event) => {
   window.sessionStorage.removeItem('pwd');
   window.sessionStorage.setItem('name', sanitizedName);
   window.sessionStorage.setItem('pwd', sanitizedPwd);
-  console.log({
-    name: sanitizedName,
-    password: sanitizedPwd,
-    setName: sessionStorage.getItem('name'),
-  });
+
+  // console.log({
+  //   name: sanitizedName,
+  //   password: sanitizedPwd,
+  //   setName: sessionStorage.getItem('name'),
+  // });
 
   const API_URL = process.env.REACT_APP_DB_HOST;
 

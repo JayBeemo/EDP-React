@@ -158,7 +158,6 @@ export default function Main(){
     const LogoutHandleOnClick = () =>{
         navigate('/')
         window.sessionStorage.removeItem('name')
-        console.log(content)
     }
 
 //Drawer 설정
