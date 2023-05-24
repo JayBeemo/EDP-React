@@ -170,8 +170,8 @@ export default function PointReview(props) {
             COLORCD: item.COLORCD,
             SIZECD: item.SIZECD,
             STYLENM: item.STYLENM,
-            SALECONSAMT: item.SALECONSAMT,
-            USE_POINT: item.USE_POINT,
+            SALECONSAMT: Number(item.SALECONSAMT).toLocaleString(),
+          USE_POINT: Number(item.USE_POINT).toLocaleString(),
         }));
     }, [showFilteredData, filteredData, listArr]);
 

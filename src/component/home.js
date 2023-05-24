@@ -72,8 +72,6 @@ export default function Dashboard(props){
                     }
                     return month;
     }
-
-    
     
     //구매내역 LIST API 콜
     useEffect(()=>{
@@ -93,6 +91,7 @@ export default function Dashboard(props){
             let json = JSON.parse(JSON.stringify(response.data));
             let range = response.data.length;
             let newArr = [];
+
             // 구매내역 LIST 파싱 및 배열 할당
             for(let i=0;i<range;i++){
               newArr.push(JSON.stringify(json[i]));
@@ -169,8 +168,8 @@ export default function Dashboard(props){
           COLORCD: item.COLORCD,
           SIZECD: item.SIZECD,
           STYLENM: item.STYLENM,
-          SALECONSAMT: item.SALECONSAMT,
-          USE_POINT: item.USE_POINT,
+          SALECONSAMT: Number(item.SALECONSAMT).toLocaleString(),
+          USE_POINT: Number(item.USE_POINT).toLocaleString(),
         }));
       }, [listArr]);
 
