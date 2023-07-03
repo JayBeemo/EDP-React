@@ -364,7 +364,7 @@ export default function Dashboard(props){
             </Grid>
             <Grid item xs={12}>
             <div className='table_Header'>
-                <Typography paragraph variant='h4'
+                <Typography paragraph variant='h5'
                 fontFamily='NotoSansKR-Bold'
                 sx={{
                     color: 'white',
