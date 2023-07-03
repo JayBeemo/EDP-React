@@ -81,8 +81,7 @@ const handleSubmit = (event) => {
   // Loading 로드
   setLoading(true);
   // API 호출
-  axios
-    .post(
+  axios.post(
       API_URL + '/api/apitool',
       {
         type: 'auth',

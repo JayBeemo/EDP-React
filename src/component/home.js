@@ -53,26 +53,65 @@ export default function Dashboard(props){
     // 날짜 선언
     
 
+    // const bungi = () => {
+    //     const date = new Date();
+    //     let month;
+    //     if (date.getMonth() < 4 && date.getMonth() > 0) {
+    //         month = "1분기";
+    //         console.log(month);
+    //     } else
+    //         if (date.getMonth() < 6 && date.getMonth() > 2) {
+    //             month = "2분기";
+    //             console.log(month);
+    //         }
+    //         else
+    //             if (date.getMonth() < 10 && date.getMonth() > 6) {
+    //                 month = "3분기";
+    //                 console.log(month);
+    //             }
+    //             else
+    //                 if (date.getMonth() < 13 && date.getMonth() > 9) {
+    //                     month = "4분기";
+    //                     console.log(month);
+    //                 }
+    //                 return month;
+    // }
+
     const bungi = () => {
         const date = new Date();
         let month;
-        if (date.getMonth() < 4 && date.getMonth() > 0) {
-            month = "1분기";
-        } else
-            if (date.getMonth() < 7 && date.getMonth() > 3) {
-                month = "2분기";
-            }
-            else
-                if (date.getMonth() < 10 && date.getMonth() > 6) {
-                    month = "3분기";
-                }
-                else
-                    if (date.getMonth() < 13 && date.getMonth() > 9) {
-                        month = "4분기";
-                    }
-                    return month;
-    }
     
+        switch (date.getMonth()) {
+            case 0:
+            case 1:
+            case 2:
+                month = "1분기";
+                break;
+            case 3:
+            case 4:
+            case 5:
+                month = "2분기";
+                break;
+            case 6:
+            case 7:
+            case 8:
+                month = "3분기";
+                break;
+            case 9:
+            case 10:
+            case 11:
+                month = "4분기";
+                break;
+            default:
+                month = " ";
+        }
+    
+        if (month) {
+            console.log(month);
+        }
+        
+        return month;
+    }
     //구매내역 LIST API 콜
     useEffect(()=>{
         const API_URL = process.env.REACT_APP_DB_HOST;
@@ -325,7 +364,7 @@ export default function Dashboard(props){
             </Grid>
             <Grid item xs={12}>
             <div className='table_Header'>
-                <Typography paragraph variant='h5'
+                <Typography paragraph variant='h4'
                 fontFamily='NotoSansKR-Bold'
                 sx={{
                     color: 'white',
