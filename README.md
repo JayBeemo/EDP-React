@@ -19,8 +19,7 @@ ReactJS 를 통한 직원 할인 포인트 조회 웹
 ### ⚙️ 개발 환경
 - **IDE** : Visual Studio Code v1.74.2
 - **Language : Javascript
-- **Framework** : Node.js v18 / express.JS v4.18.2 / React.JS v18.2.X
-- **UI Library** : Material UI
+- **Framework & Library** : Node.js v18 / express.JS v4.18.2 / React.JS v18.2.X / Material UI
 - **Database** : Oracle DB(11xe)
 - **ORM** : Mybatis
 
