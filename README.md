@@ -1,5 +1,4 @@
 # EDP ( Employee Discount Point )
-ReactJS 를 통한 직원 할인 포인트 조회 웹
 
 
 ## 🖥️ 프로젝트 소개
